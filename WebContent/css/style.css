@@ -1,0 +1,120 @@
+    body {
+        background-color: azure;
+        width: 100%;
+        background-image: url("../img/vbg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    header #logo {
+        margin-left: 20px;
+        width: 130px;
+        ;
+    }
+    
+    header {
+        background-color: rgb(230, 230, 230);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        padding: 0 auto;
+        border-bottom: 2px grey solid;
+        border-radius: 1px;
+    }
+    /*
+    header h3 {
+        width: 40%;
+        height: 50px;
+        float: left;
+        color: #333;
+        font-family: Bubbler One;
+        margin: 18px;
+    }
+    */
+    
+    header a {
+        font-size: 18px;
+        width: 60%;
+        height: 50px;
+        text-decoration: none;
+        text-align: right;
+        font-family: Bubbler One;
+        color: black;
+        font-weight: 600;
+        margin: 30px;
+        padding: 15px 0px 15px;
+        position: relative;
+        top: -30%;
+        left: 18%;
+    }
+    
+    .airlineform,
+    .airportform,
+    .loginform {
+        font-family: Bubbler One;
+        color: #333;
+        font-weight: 600;
+        position: relative;
+        top: 20%;
+        width: 50%;
+        height: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgba(200, 200, 200, 0.7);
+        border: 2px grey solid;
+        border-radius: 10px;
+        padding: 5%;
+        box-shadow: 3px 3px rgba(100, 100, 100, 0.7);
+    }
+    
+    .airlineform [ type="text"],
+    .airportform [ type="text"],
+    .loginform [ type="text"] {
+        font-family: Bubbler One, Verdana;
+        border: 1px grey inset;
+        border-radius: 10px;
+        width: 200px;
+        height: 25px;
+        outline: 0;
+    }
+    
+    .airlineform .buttonform,
+    .airportform .buttonform,
+    .loginform .buttonform {
+        font-family: Bubbler One;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 10px;
+        width: 20%;
+        height: 25px;
+        outline: 0;
+    }
+    
+    .loginform a {
+        color: grey;
+        margin: 10px;
+        display: block;
+        font-family: Segoe ui;
+        padding-top: 10px;
+    }
+    
+    .logincontainer {
+        position: relative;
+        top: 20%;
+        margin: auto;
+        padding: auto;
+        width: 60%;
+    }
+    
+    #loginavatar {
+        display: flex;
+        justify-content: center;
+        height: 90px;
+        margin-top: -75px;
+        margin-left: 38.5%;
+        margin-bottom: 20px;
+        border: 2px grey solid;
+        border-radius: 50%;
+    }

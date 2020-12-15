@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>FMS - Airport</title>
+    <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
+</head>
+
+
+<body>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
+
+
+    <header>
+
+        <img id="logo" src="img/icons/fms transparent.png">
+        <a class="activeSection" id="navbarCreate" href="">Create</a>
+        <a id="navbarList" href="">List</a>
+        <a id="navbarModify" href="">Modify</a>
+        <a id="navbarBook" href="">Book</a>
+    </header>
+
+    <form class="airportform" action="AirportServlet" method="GET">
+
+        <label for="airportCodename">Codename:</label><br>
+        <input type="text" name="airportCodename" /><br/><br>
+
+        <label for="airportFullname">Fullname:</label><br>
+        <input type="text" name="airportFullname" /> <br/><br>
+
+        <label for="airportType">Type:</label><br>
+        <input type="text" name="airportType" /> <br/><br/>
+
+        <label for="airportCity">City:</label><br>
+        <input type="text" name="airportCity" /> <br/><br/>
+
+        <label for="airportCountry">Country:</label><br>
+        <input type="text" name="airportCountry" label="Airport Country" /> <br/><br/>
+
+
+
+        <input class="buttonform" type="submit" value="Create" />
+
+    </form>
+
+
+</body>
+
+</html>

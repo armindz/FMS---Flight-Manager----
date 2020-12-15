@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>FMS - Airline</title>
+    <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
+</head>
+
+
+<body>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
+
+
+    <header>
+
+        <img id="logo" src="img/icons/fms transparent.png">
+        <a class="activeSection" id="navbarCreate" href="">Create</a>
+        <a id="navbarList" href="">List</a>
+        <a id="navbarModify" href="">Modify</a>
+        <a id="navbarBook" href="">Book</a>
+    </header>
+
+    <form class="airlineform" action="FlightManagerServlet" method="GET">
+
+        <label for="airlineCodename">Codename:</label><br>
+        <input type="text" name="airlineCodename" /><br/><br>
+
+        <label for="airlineCallsign">Callsign:</label><br>
+        <input type="text" name="airlineCallsign" /> <br/><br>
+
+
+        <label for="airlineCountry">Country:</label><br>
+        <input type="text" name="airlineCountry" /> <br/><br/>
+
+        <input class="buttonform" type="submit" value="Create" />
+
+    </form>
+
+
+</body>
+
+</html>
