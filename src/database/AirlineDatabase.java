@@ -61,16 +61,16 @@ public class AirlineDatabase {
 		return airlines;
 	}
 
-	public void updateDatabaseContent(String Airline_Callsign, String Airline_Country) {
+	public void updateDatabaseContent(String Airline_Codename, String Airline_Callsign, String Airline_Country) {
 
 		try {
 			
 			Connection conn = DatabaseConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateAirlinesData);
 			
-			preparedStmt.setString(2, Airline_Callsign); // update Airline_Callsign column
-			preparedStmt.setString(3, Airline_Country); // update Airline_Country column
-
+			preparedStmt.setString(1, Airline_Callsign); // update Airline_Callsign column
+			preparedStmt.setString(2, Airline_Country); // update Airline_Country column
+			preparedStmt.setString(3,  Airline_Codename);
 			preparedStmt.executeUpdate();
 
 			conn.close();

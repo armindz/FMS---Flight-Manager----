@@ -13,17 +13,42 @@
 
 
     <header>
-        <img id="logo" src="img/icons/fms transparent.png">
 
-        <a id="navbarCreate" href="">Create</a>
+        <img id="logo" src="img/icons/fms transparent.png">
+        <a class="activeSection" id="navbarCreate" href="">Create</a>
         <a id="navbarList" href="">List</a>
         <a id="navbarModify" href="">Modify</a>
         <a id="navbarBook" href="">Book</a>
     </header>
 
+    <form class="flightform" action="FlightServlet" method="GET">
 
 
-    <input type="submit" value="Submit" />
+        <label for="airlineCodename">Airline Codename: </label><br>
+        <input type="text" name="airlineCodename" /><br/><br>
+
+        <label for="airportCodename">Airport Codename:</label><br>
+        <input type="text" name="airportCodename" /> <br/><br>
+
+        <label for="destinationAirportCodename">Destination Airport Codename:</label><br>
+        <input type="text" name="destinationAirportCodename" /> <br/><br/>
+
+        <label for="flightClass">Flight Class:</label><br>
+        <input type="text" name="flightClass" /> <br/><br/>
+
+        <label for="dateOfFlight">Date of flight:</label><br>
+        <input type="datetime-local" name="dateOfFlight" /> <br/><br/>
+
+        <label for="seatRow">Latest seat row:</label><br>
+        <input type="text" name="seatRow" /> <br/><br/>
+
+        <label for="seatNumber">Seats per row:</label><br>
+        <input type="text" name="seatNumber" /> <br/><br/>
+
+        <label for="flightPrice">Flight price:</label><br>
+        <input type="text" name="flightPrice" /> <br/><br/>
+
+        <input class="buttonform" type="submit" value="Create" />
 
     </form>
 
