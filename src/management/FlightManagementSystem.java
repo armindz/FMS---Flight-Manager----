@@ -25,86 +25,41 @@ public class FlightManagementSystem {
 	FlightDatabase flightdb = new FlightDatabase();
 
 	
-	private Flight flightCreatorQuery() {
 	
-		Scanner scan = new Scanner(System.in);
-		try {
+	public void createFlight(String airlineCodename, String airportCodename, String destinationAirportCodename,
+			String flightClass, Calendar dateOfFlight, char flightSeatRows, int flightNumberOfSeatsPerRow,
+			double flightPrice) {
 
-			System.out.println("Please type airline codename!");
-			String airlineCodename = scan.next();
-			System.out.println("Please type airport codename!");
-			String airportCodename = scan.next();
-			System.out.println("Please type destination airport codename!");
-			String destinationAirportCodename = scan.next();
-			System.out.println("Please type flight class!");
-			String flightClass = scan.next();
-			System.out.println("Please type seat row!");
-			char flightSeatRows = scan.next().charAt(0);
-			System.out.println("Please type seat number!");
-			int flightNumberOfSeatsPerRow = scan.nextInt();
-			System.out.println("Please type flight price!");
-			double flightPrice = scan.nextDouble();
-			System.out.println("Please type date of flight!");
-			System.out.println("YEAR");
-			int year = scan.nextInt();
-			System.out.println("MONTH");
-			int month = scan.nextInt();
-			System.out.println("DAY");
-			int day = scan.nextInt();
-			System.out.println("HOURS");
-			int hourOfDay = scan.nextInt();
-			System.out.println("MIN");
-			int minute = scan.nextInt();
-		
-			Calendar dateOfFlight = Calendar.getInstance();
-			dateOfFlight.set(year, month - 1, day, hourOfDay, minute); // set date based on user input data
-			
-			Flight flight = new Flight(flightdb.generateFlightId(), airlinems.getAirlineFromCodename(airlineCodename),
-					airportms.getAirportFromCodename(airportCodename),
-					airportms.getAirportFromCodename(destinationAirportCodename), flightClass, dateOfFlight,
-					flightSeatRows, flightNumberOfSeatsPerRow, flightPrice);
-			
-			return flight;
-		
-	} 
-		catch (Exception e) {
-		System.out.println("Something went wrong");
-		e.printStackTrace();
+		Flight flight = new Flight(flightdb.generateFlightId(), airlinems.getAirlineFromCodename(airlineCodename),
+				airportms.getAirportFromCodename(airportCodename),
+				airportms.getAirportFromCodename(destinationAirportCodename), flightClass, dateOfFlight, flightSeatRows,
+				flightNumberOfSeatsPerRow, flightPrice);
+
+		System.out.println(flight);
+		if (isFlightDataValid(flight, flight.getSeatRow(), flight.getAirline().getAirlineCodename(),
+				flight.getAirport().getAirportCodename(), flight.getDestinationAirport().getAirportCodename())) {
+
+			createSeatsAndStoreToDatabase(flight, flight.getSeatRow(), flight.getSeatNumber());
+			addFlightToDatabase(flight);
+
+			System.out.println("Flight successfully created!");
+		} else {
+			System.out.println("Data is not unique or seat row not valid.");
+		}
+
 	}
-		return null;
-		
-		
-	}
-	
-	private boolean isFlightDataValid(Flight flight, char flightSeatRows, String airlineCodename, String airportCodename, String destinationAirportCodename) {
-		
+	private boolean isFlightDataValid(Flight flight, char flightSeatRows, String airlineCodename,
+			String airportCodename, String destinationAirportCodename) {
+
 		if (isFlightDataUnique(flight) && isSeatRowValid(flightSeatRows) && isAirlineCodenameValid(airlineCodename)
 				&& isAirportCodenameValid(airportCodename) && isAirportCodenameValid(destinationAirportCodename)) {
-		return true;
-	}
-		
+			return true;
+		}
+
 		return false;
 	}
-	public void createFlight() {
+
 	
-
-			Flight flight = flightCreatorQuery();
-			
-			System.out.println(flight);
-			if (isFlightDataValid(flight, flight.getSeatRow(), flight.getAirline().getAirlineCodename(), 
-					flight.getAirport().getAirportCodename(), flight.getDestinationAirport().getAirportCodename())) {
-				
-
-         		createSeatsAndStoreToDatabase(flight, flight.getSeatRow(), flight.getSeatNumber());
-				addFlightToDatabase(flight);
-
-				System.out.println("Flight successfully created!");
-			} else {
-				System.out.println("Data is not unique or seat row not valid.");
-			}
-
-		
-	}
 
 	private void createSeatsAndStoreToDatabase(Flight flight, char seatRow, int numberOfSeatsPerRow) {
 
@@ -122,9 +77,10 @@ public class FlightManagementSystem {
 		System.out.println("List" + flight.getListOfSeats());
 	}
 
-	public void displayAvailableSeatsInSpecificFlight(int flight_id) {  
-		
-		ArrayList <Seat> listOfSeats = fetchSeatDatabaseContentToList(); // prepare listOfSeats ArrayList for use by fetching content from database
+	public void displayAvailableSeatsInSpecificFlight(int flight_id) {
+
+		ArrayList<Seat> listOfSeats = fetchSeatDatabaseContentToList(); // prepare listOfSeats ArrayList for use by
+																		// fetching content from database
 
 		for (int i = 0; i < listOfSeats.size(); i++) {
 
@@ -150,7 +106,8 @@ public class FlightManagementSystem {
 
 	private boolean isFlightDataUnique(Flight flight) {
 
-		ArrayList <Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through given ArrayList
+		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through
+																			// given ArrayList
 		if (!listOfFlights.isEmpty() && listOfFlights.contains(flight)) {
 			return false;
 		}
@@ -160,8 +117,9 @@ public class FlightManagementSystem {
 
 	private boolean isAirlineCodenameValid(String airlineCodename) {
 
-		ArrayList <Airline> listOfAirlines = airlinedb.fetchDatabaseContent(); // // return airline database content through
-																		// given ArrayList
+		ArrayList<Airline> listOfAirlines = airlinedb.fetchDatabaseContent(); // // return airline database content
+																				// through
+		// given ArrayList
 		for (int i = 0; i < listOfAirlines.size(); i++) {
 			String airlineCodenameFromList = listOfAirlines.get(i).getAirlineCodename();
 			if (airlineCodenameFromList.equals(airlineCodename)) {
@@ -174,7 +132,8 @@ public class FlightManagementSystem {
 
 	private boolean isAirportCodenameValid(String airportCodename) {
 
-		ArrayList <Airport> listOfAirports = airportdb.fetchDatabaseContent();  // return airport database content through given ArrayList
+		ArrayList<Airport> listOfAirports = airportdb.fetchDatabaseContent(); // return airport database content through
+																				// given ArrayList
 
 		for (int i = 0; i < listOfAirports.size(); i++) {
 			String airportCodenameFromList = listOfAirports.get(i).getAirportCodename();
@@ -197,17 +156,19 @@ public class FlightManagementSystem {
 
 	public Flight getFlightFromFlightID(int flightID) {
 
-		ArrayList <Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through given ArrayList
+		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through
+																			// given ArrayList
 
 		for (int i = 0; i < listOfFlights.size(); i++) {
 
 			int flightIDFromList = listOfFlights.get(i).getFlight_id();
 
 			if (flightID == flightIDFromList) {
-				Flight flight = new Flight(listOfFlights.get(i).getFlight_id(), listOfFlights.get(i).getAirline(), listOfFlights.get(i).getAirport(),
-						listOfFlights.get(i).getDestinationAirport(), listOfFlights.get(i).getFlightClass(),
-						listOfFlights.get(i).getDateOfFlight(), listOfFlights.get(i).getSeatRow(),
-						listOfFlights.get(i).getSeatNumber(), listOfFlights.get(i).getFlightPrice());
+				Flight flight = new Flight(listOfFlights.get(i).getFlight_id(), listOfFlights.get(i).getAirline(),
+						listOfFlights.get(i).getAirport(), listOfFlights.get(i).getDestinationAirport(),
+						listOfFlights.get(i).getFlightClass(), listOfFlights.get(i).getDateOfFlight(),
+						listOfFlights.get(i).getSeatRow(), listOfFlights.get(i).getSeatNumber(),
+						listOfFlights.get(i).getFlightPrice());
 				return flight;
 
 			}
@@ -217,48 +178,66 @@ public class FlightManagementSystem {
 
 	}
 
-	public ArrayList<Flight> getListOfFlights() {
+	public int getFlightIdFromFlight(Flight flight) {
+
+		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through
+																			// given ArrayList
+
+		for (int i = 0; i < listOfFlights.size(); i++) {
+
+			Flight flightFromList = listOfFlights.get(i);
+			if (flight.getAirline().equals(flightFromList.getAirline())
+					&& flight.getAirport().equals(flightFromList.getAirport())
+					&& flight.getDestinationAirport().equals(flightFromList.getDestinationAirport())
+					&& flight.getFlightClass().equals(flightFromList.getFlightClass())
+					&& flight.getSeatNumber() == flightFromList.getSeatNumber()
+					&& flight.getSeatRow() == (flightFromList.getSeatRow())) {
+
+				return flightFromList.getFlight_id();
+			}
+		}
+			return 0;
+		}
 	
-		return fetchFlightDatabaseContentToList(); 
+
+	public int getFlightIdFromFlightData(String airlineCodename, String airportCodename,
+			String destinationAirportCodename, String flightClass, Calendar dateOfFlight, char flightSeatRows,
+			int seatNumber, double flightPrice) {
+
+		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through
+																			// given ArrayList
+
+		for (int i = 0; i < listOfFlights.size(); i++) {
+
+			Flight flightFromList = listOfFlights.get(i);
+			if (airlineCodename.equals(flightFromList.getAirline().getAirlineCodename())
+					&& airportCodename.equals(flightFromList.getAirport().getAirportCodename())
+					&& destinationAirportCodename.equals(flightFromList.getDestinationAirport().getAirportCodename())
+					&& dateOfFlight.equals(flightFromList.getDateOfFlight())
+					&& flightClass.equals(flightFromList.getFlightClass())
+					&& seatNumber == flightFromList.getSeatNumber()
+					&& flightSeatRows == (flightFromList.getSeatRow())) {
+
+				return flightFromList.getFlight_id();
+			}
+		}
+		return 0;
+	}
+
+	public ArrayList<Flight> getListOfFlights() {
+
+		return fetchFlightDatabaseContentToList();
 	}
 
 	public ArrayList<Seat> getListOfSeats() {
-		
+
 		return fetchSeatDatabaseContentToList();
 	}
 
-	/*public ArrayList <Integer> getListOfFlightIds() {            // TOO MANY CONNECTIONS 
-		
-		ArrayList <Integer> listOfFlightIds = new ArrayList<>();
-		
-		for (int i= 0; i < getListOfFlights().size(); i++) {
-			
-			listOfFlightIds.add(getListOfFlights().get(i).getFlight_id());
-			
-		
-		}
-		
-	return listOfFlightIds;
-	}
+	
+	public ArrayList<Seat> fetchSeatDatabaseContentToList() {
 
-
-	public ArrayList <String> getListOfFlightClasses() {
-		
-		ArrayList <String> listOfFlightClass = new ArrayList<>();
-		
-			for (int i= 0; i < getListOfFlights().size(); i++) {
-			
-			listOfFlightClass.add(getListOfFlights().get(i).getFlightClass());
-			
-		
-		}
-			
-			return listOfFlightClass;
-	}
-*/
-	public ArrayList<Seat> fetchSeatDatabaseContentToList() { 
-
-		ArrayList <Seat> listOfSeats = seatdb.fetchDatabaseContent(); 
+		ArrayList<Seat> listOfSeats = seatdb.fetchDatabaseContent();
 		if (listOfSeats.isEmpty()) {
 			System.out.println("There's no seats stored in database!");
 			return null;
@@ -268,17 +247,17 @@ public class FlightManagementSystem {
 
 	public ArrayList<Flight> fetchFlightDatabaseContentToList() {
 
-		ArrayList <Flight> listOfFlights = flightdb.fetchDatabaseContent();
-		
+		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent();
+
 		if (listOfFlights.isEmpty()) {
 			System.out.println("There's no flights stored in database!");
 			return null;
 		}
 		return listOfFlights;
 	}
-	
-	public void addFlightToDatabase (Flight flight) {
-		
+
+	public void addFlightToDatabase(Flight flight) {
+
 		flightdb.storeToDatabase(flight);
 	}
 

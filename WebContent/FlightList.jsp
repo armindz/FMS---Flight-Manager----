@@ -1,4 +1,6 @@
 <%@page import="management.FlightManagementSystem"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Flight"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -15,18 +17,41 @@
     <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
 
 
-    <header>
+     <header>
+
         <img id="logo" src="img/icons/fms transparent.png">
+        <div class="navbarsections">
+            <div class="dropdown">
+                <button class="dropbtn">Create</button>
+                <div class="dropdown-content">
+                    <a href="AirlineForm.html">Airline</a>
+                    <a href="AirportForm.html">Airport</a>
+                    <a href="FlightForm.html">Flight</a>
+                </div>
+            </div>
 
-        <a id="navbarCreate" href="">Create</a>
-        <a id="navbarList" href="">List</a>
-        <a id="navbarModify" href="">Modify</a>
-        <a id="navbarBook" href="">Book</a>
+            <div class="dropdown">
+                <button class="dropbtn">List</button>
+                <div class="dropdown-content">
+                    <a href="AirlineList.jsp">Airline</a>
+                    <a href="AirportList.jsp">Airport</a>
+                    <a href="FlightList.jsp">Flight</a>
+                </div>
+            </div>
+
+
+            <div class="dropdown">
+                <button class="dropbtn">Modify</button>
+                <div class="dropdown-content">
+                    <a href="#">Airline</a>
+                    <a href="#">Airport</a>
+                    <a href="#">Flight</a>
+                </div>
+            </div>
+            <a id="navbarBook" href="">Book</a>
+
+        </div>
     </header>
-
-
-
-    <input type="submit" value="Submit" />
 
  <h3 id="airlinelist" >Flight list </h3>
   <%! FlightManagementSystem flightms = new FlightManagementSystem(); %>
@@ -46,18 +71,19 @@
   </tr>
   <tr>
   <% 
- for (int i = 0; i< flightms.fetchFlightDatabaseContentToList().size(); i++) {
+ ArrayList <Flight> fetchDataToList =  flightms.fetchFlightDatabaseContentToList();
+ for (int i = 0; i < fetchDataToList.size(); i++) {
 	 
 	 %>
-	 <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getFlight_id() %> </td>
-	 <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getAirline().getAirlineCodename() %> </td>
-	  <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getAirport().getAirportCodename() %> </td>
-	   <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getDestinationAirport().getAirportCodename() %> </td>
-	    <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getFlightClass() %> </td>
-	     <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getDateOfFlight().getTime() %> </td>
-	      <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getSeatRow() %> </td>
-	       <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getSeatNumber() %> </td>
-	        <td>  <%= flightms.fetchFlightDatabaseContentToList().get(i).getFlightPrice() %> </td>
+	 <td>  <%= fetchDataToList.get(i).getFlight_id() %> </td>
+	 <td>  <%= fetchDataToList.get(i).getAirline().getAirlineCodename() %> </td>
+	  <td>  <%= fetchDataToList.get(i).getAirport().getAirportCodename() %> </td>
+	   <td>  <%= fetchDataToList.get(i).getDestinationAirport().getAirportCodename() %> </td>
+	    <td>  <%= fetchDataToList.get(i).getFlightClass() %> </td>
+	     <td>  <%= fetchDataToList.get(i).getDateOfFlight().getTime() %> </td>
+	      <td>  <%= fetchDataToList.get(i).getSeatRow() %> </td>
+	       <td>  <%= fetchDataToList.get(i).getSeatNumber() %> </td>
+	        <td>  <%= fetchDataToList.get(i).getFlightPrice() %> </td>
 	 </tr>
 	 <%
  }

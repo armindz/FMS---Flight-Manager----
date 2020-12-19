@@ -90,12 +90,14 @@ public class FlightDatabase {
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfFlights);
 			
-			Calendar cal = Calendar.getInstance();
+			
 			flights.clear();
-
 			while (rset.next()) {
+				
+				Calendar cal = Calendar.getInstance();
 				Timestamp timestamp = rset.getTimestamp("Date_of_flight");
 				cal.setTime(timestamp);
+				
 				
 				Flight flight = new Flight(rset.getInt("flight_ID"), airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")),
 						airportms.getAirportFromCodename(rset.getString("Airport_Codename")),

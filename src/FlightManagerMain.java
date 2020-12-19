@@ -46,7 +46,7 @@ public class FlightManagerMain {
 					
 				case "3":
 					System.out.println("Create flight");
-					flightms.createFlight();
+				//	flightms.createFlight();
 					break;
 					
 				case "4":
