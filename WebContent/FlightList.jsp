@@ -1,4 +1,5 @@
 <%@page import="management.FlightManagementSystem"%>
+<%@ page import="database.FlightDatabase" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Flight"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -55,6 +56,7 @@
 
  <h3 id="airlinelist" >Flight list </h3>
   <%! FlightManagementSystem flightms = new FlightManagementSystem(); %>
+  <%! FlightDatabase flightdb = new FlightDatabase(); %>
   
   <table style="width:100%">
   <tr> 
@@ -68,6 +70,7 @@
     <th>Latest seat row</th>
     <th>Seats per row</th>
     <th>Flight price</th>
+    <th>Functions</th>
   </tr>
   <tr>
   <% 
@@ -75,6 +78,7 @@
  for (int i = 0; i < fetchDataToList.size(); i++) {
 	 
 	 %>
+	 <tr>
 	 <td>  <%= fetchDataToList.get(i).getFlight_id() %> </td>
 	 <td>  <%= fetchDataToList.get(i).getAirline().getAirlineCodename() %> </td>
 	  <td>  <%= fetchDataToList.get(i).getAirport().getAirportCodename() %> </td>
@@ -84,10 +88,25 @@
 	      <td>  <%= fetchDataToList.get(i).getSeatRow() %> </td>
 	       <td>  <%= fetchDataToList.get(i).getSeatNumber() %> </td>
 	        <td>  <%= fetchDataToList.get(i).getFlightPrice() %> </td>
-	 </tr>
-	 <%
+	       <td> 
+	        <form id="remove" action="FlightRemoveServlet" method="GET" name="removeid">
+	     <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>"/>
+	       <input type="submit" name="remove" value="Remove" />
+
+		 <form id="update" action="FlightUpdateServlet" method="GET" name="updateid">
+	     <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>"/>
+	       <input type="submit" name="update" value="Update" />
+	       
+	        <form id="viewFlight" action="ViewFlightServlet" method="GET" name="vievFlightId">
+	     <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>"/>
+	       <input type="submit" name="view" value="View" />
+
+				</form> </td> </tr>
+	      
+	 <% //<a href ="delete?id<c:out value=' ' />"> Delete </a>
  }
 		 %>
+		 
 </table>
   
 
