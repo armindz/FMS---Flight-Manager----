@@ -14,14 +14,14 @@
 
     <header>
 
-        <img id="logo" src="img/icons/fms transparent.png">
+        <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
         <div class="navbarsections">
             <div class="dropdown">
                 <button class="dropbtn">Create</button>
                 <div class="dropdown-content">
                     <a href="AirlineForm.html">Airline</a>
                     <a href="AirportForm.html">Airport</a>
-                    <a href="FlightForm.html">Flight</a>
+                    <a href="FlightForm.jsp">Flight</a>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
         </div>
     </header>
 
-    <form class="airportform" action="AirportServlet" method="GET">
+    <form class="airportform" action="AirportAddServlet" method="GET">
 
         <label for="airportCodename">Codename:</label><br>
         <input type="text" name="airportCodename" /><br/><br>
@@ -57,7 +57,11 @@
         <input type="text" name="airportFullname" /> <br/><br>
 
         <label for="airportType">Type:</label><br>
-        <input type="text" name="airportType" /> <br/><br/>
+        <select name="airportType" id="airportTypeSelect">
+   			 <option value="LARGE">LARGE</option>
+    			<option value="MEDIUM">MEDIUM</option>
+   				 <option value="SMALL">SMALL</option>
+ 			 </select> <br/><br/>
 
         <label for="airportCity">City:</label><br>
         <input type="text" name="airportCity" /> <br/><br/>

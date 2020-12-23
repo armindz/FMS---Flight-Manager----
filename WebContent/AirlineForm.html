@@ -14,14 +14,14 @@
 
     <header>
 
-        <img id="logo" src="img/icons/fms transparent.png">
+        <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
         <div class="navbarsections">
             <div class="dropdown">
                 <button class="dropbtn">Create</button>
                 <div class="dropdown-content">
                     <a href="AirlineForm.html">Airline</a>
                     <a href="AirportForm.html">Airport</a>
-                    <a href="FlightForm.html">Flight</a>
+                    <a href="FlightForm.jsp">Flight</a>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
         </div>
     </header>
 
-    <form class="airlineform" action="AirlineServlet" method="GET">
+    <form class="airlineform" action="AirlineAddServlet" method="GET">
 
         <label for="airlineCodename">Codename:</label><br>
         <input type="text" name="airlineCodename" /><br/><br>

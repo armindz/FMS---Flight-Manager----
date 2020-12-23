@@ -1,4 +1,6 @@
 
+
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.Enumeration;
@@ -6,7 +8,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
@@ -15,22 +16,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.AirportDatabase;
-import database.FlightDatabase;
-import management.AirportManagementSystem;
-import management.FlightManagementSystem;
-import models.Airline;
-import models.Airport;
-import models.Flight;
 
-/**
- * Servlet implementation class FlightServlet
- */
-@WebServlet("/FlightServlet")
-public class FlightServlet extends HttpServlet {
+import management.FlightManagementSystem;
+
+
+@WebServlet("/FlightAddServlet")
+public class FlightAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public FlightServlet() {
+	public FlightAddServlet() {
 		super();
 
 	}
@@ -76,7 +70,7 @@ public class FlightServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
