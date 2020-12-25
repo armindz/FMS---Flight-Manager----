@@ -2,6 +2,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,34 +13,36 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.FlightDatabase;
 import management.FlightManagementSystem;
 
-/**
- * Servlet implementation class FlightUpdateServlet
- */
+
 @WebServlet("/FlightUpdateServlet")
 public class FlightUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	
 	public FlightUpdateServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session=request.getSession();  
 		try {
+			if(session != null) {
 			updateFlight(request, response);
+			}
+			
+			else {
+				PrintWriter out = response.getWriter();  
+				out.print("Not logged in!");
+			}
 		}
 
 		catch (SQLException | IOException | ParseException e) {
@@ -76,13 +79,10 @@ public class FlightUpdateServlet extends HttpServlet {
 		response.sendRedirect("FlightList.jsp");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

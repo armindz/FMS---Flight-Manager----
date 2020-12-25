@@ -45,11 +45,14 @@
             </div>
             <a id="navbarBook" href="">Book</a>
 
+            <form class="logoutButton" action="LogoutServlet" method="GET">
+                <button class="logoutbtn">Log out!</button>
+            </form>
         </div>
     </header>
 
     <form class="airlineform" action="AirlineAddServlet" method="GET">
-
+        <img class="formavatar" src="img\icons\airlineavatar.jpg">
         <label for="airlineCodename">Codename:</label><br>
         <input type="text" name="airlineCodename" /><br/><br>
 

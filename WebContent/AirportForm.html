@@ -44,12 +44,14 @@
                 </div>
             </div>
             <a id="navbarBook" href="">Book</a>
-
+            <form class="logoutButton" action="LogoutServlet" method="GET">
+                <button class="logoutbtn">Log out!</button>
+            </form>
         </div>
     </header>
 
     <form class="airportform" action="AirportAddServlet" method="GET">
-
+        <img class="formavatar" src="img\icons\airportavatar.png">
         <label for="airportCodename">Codename:</label><br>
         <input type="text" name="airportCodename" /><br/><br>
 

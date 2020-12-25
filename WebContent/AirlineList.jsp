@@ -10,12 +10,13 @@
                     <meta charset="ISO-8859-1">
                     <title>FMS - Airline List</title>
                     <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
+                     <link rel="stylesheet" type="text/css" href="css/style.css">
+                    <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
                 </head>
 
 
                 <body>
-                    <link rel="stylesheet" type="text/css" href="css/style.css">
-                    <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
+                   
 
 
                     <header>
@@ -48,14 +49,15 @@
                                 </div>
                             </div>
                             <a id="navbarBook" href="">Book</a>
-
+ 										<form class="logoutButton" action="LogoutServlet" method="GET">
+                                        <button class="logoutbtn">Log out!</button>
+                                    </form>
                         </div>
                     </header>
 
 
 
                     <input type="submit" value="Submit" />
-
 
                     <h3 id="airlinelist">Airline list</h3>
                     <%!AirlineManagementSystem airlinems = new AirlineManagementSystem();%>
