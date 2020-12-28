@@ -13,6 +13,7 @@ public class AirportManagementSystem {
 	AirportDatabase airportdb = new AirportDatabase();
 	private final int AIRPORT_CODENAME_LENGTH = 3;
 	
+	
 	public void createAirport(String airportCodename, String airportFullname, String airportType, String airportCity, String airportCountry) {
 
 		try {
@@ -45,6 +46,8 @@ public class AirportManagementSystem {
 			String airportTypeFromList = listOfAirports.get(i).getAirportType();
 			String airportCityFromList = listOfAirports.get(i).getAirportCity();
 			String airportCountryFromList = listOfAirports.get(i).getAirportCountry();
+			
+			
 			if (airportCodenameFromList.equals(airportCodename)) {
 				Airport airport = new Airport(airportCodenameFromList, airportFullnameFromList, airportTypeFromList, airportCityFromList, airportCountryFromList);
 				return airport;

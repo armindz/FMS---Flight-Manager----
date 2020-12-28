@@ -83,12 +83,9 @@
  							
  						try{
  						ArrayList <Flight> fetchDataToList =  flightms.fetchFlightDatabaseContentToList();  
- 						
- 						
- 						
  						for (int i=0; i <fetchDataToList.size(); i++) 
  						
- 						{     %>
+ 						{       %>
 
                                             <td>
                                                 <%= fetchDataToList.get(i).getFlight_id() %>
@@ -141,7 +138,8 @@
  						} }  catch (Exception e){
  						
  						%>
-                                        <h3 style="text-align:center">Something went wrong. List may be empty.</h3>
+                                        <h3 style="text-align:center">Something went wrong. List may be empty. </h3>
+                                        
 
                                         <% } %>
 

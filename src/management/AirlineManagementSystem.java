@@ -53,17 +53,23 @@ public class AirlineManagementSystem {
 		ArrayList <Airline> listOfAirlines = fetchDatabaseContentToList();
 		
 		for (int i = 0; i < listOfAirlines.size(); i++) {
+			
 			String airlineCodenameFromList = listOfAirlines.get(i).getAirlineCodename();
 			String airlineCallsignFromList = listOfAirlines.get(i).getAirlineCallsign();
 			String airlineCountryFromList = listOfAirlines.get(i).getAirlineCountry();
-			if (airlineCodenameFromList.equals(airlineCodename)) {
+		
+			
+			 if (airlineCodenameFromList.equals(airlineCodename) ) {
+				 
 				Airline airline = new Airline(airlineCodenameFromList, airlineCallsignFromList, airlineCountryFromList);
 				return airline;
-
-			}
-		}
-
-		return null;
+			 }
+						
+			 }
+			
+			
+			return null;
+		
 
 	}
 

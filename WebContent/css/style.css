@@ -472,8 +472,11 @@
                 }
                 
                 .ticketPreview .ticketPreviewTable2 {
+                    background-image: url("../img/table1bgr3.jpg");
+                    background-position-x: -100px;
+                    background-position-y: 40px;
                     width: 20%;
-                    background-color: rgb(52, 121, 211);
+                    /*   background-color: rgb(52, 121, 211);*/
                     border-top-right-radius: 20px;
                     border-bottom-right-radius: 20px;
                     border-left: rgba(224, 224, 224, 0.973) 5px dashed;
