@@ -64,7 +64,7 @@
 
                             <form class="flightform" action="FlightAddServlet" method="GET">
                                 <img class="formavatar" src="img\icons\flightavatar.png">
-
+								<div class="table1">
                                 <label for="airlineCodename">Airline Codename: </label><br>
                                 <select name="airlineCodename" id="airlineCodenameSelect">
          <%! AirlineManagementSystem airlinems = new AirlineManagementSystem(); %>
@@ -100,7 +100,9 @@
     			<option value="BUSINESS CLASS">Business class</option>
    				 <option value="ECONOMY CLASS">Economy class</option>
  			 </select> <br/><br/>
-
+			</div>
+			
+			<div class="table2">
                                 <label for="dateOfFlight">Date of flight:</label><br>
                                 <input type="datetime-local" name="dateOfFlight" /> <br/><br/>
 
@@ -119,7 +121,7 @@
 
                                 <label for="flightPrice">Flight price:</label><br>
                                 <input type="text" name="flightPrice" /> <br/><br/>
-
+</div>
                                 <input class="buttonform" type="submit" value="Create" />
 
                             </form>

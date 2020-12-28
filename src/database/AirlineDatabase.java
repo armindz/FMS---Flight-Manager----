@@ -12,7 +12,7 @@ public class AirlineDatabase {
 			+ "(Airline_Codename, Airline_Callsign, Airline_Country) values " + " (?,?,?);";
 	private static String statementToDisplayDataOfAirlines = "SELECT * FROM airlines";
 	private static String statementToUpdateAirlinesData = "UPDATE airlines set Airline_Callsign= ?, Airline_Country = ? where  Airline_Codename= ? ";
-	private static String statementToDeleteDataFromAirlines = "DELETE from flights where Airline_Codename=?";
+	private static String statementToDeleteDataFromAirlines = "DELETE from airlines where Airline_Codename=?";
 
 	public void storeToDatabase(Airline airline) {
 		

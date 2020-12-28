@@ -48,7 +48,7 @@ public class AirlineRemoveServlet extends HttpServlet {
 	private void removeAirline(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		String airlineCodename = request.getParameter("airlineCodename");
+		String airlineCodename = request.getParameter("product_id");
 		AirlineManagementSystem airlinems = new AirlineManagementSystem();
 
 		airlinems.removeAirlineFromDatabase(airlinems.getAirlineFromCodename(airlineCodename));

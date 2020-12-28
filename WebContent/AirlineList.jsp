@@ -86,16 +86,21 @@
                                         <%=fetchDataToList.get(i).getAirlineCountry()%>
                                     </td>
                                     <td>
+                                    <div class="tablefunctions">
                                         <form id="remove" action="AirlineRemoveServlet" method="GET" name="removeid">
-                                            <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> <input type="submit" name="remove" value="Remove" />
+                                            <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
+                                            <input type="submit" name="remove" value="Remove" />
                                         </form>
                                         <form id="update" action="AirlineUpdateServlet" method="GET" name="updateid">
-                                            <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> <input type="submit" name="update" value="Update" />
+                                            <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
+                                            <input type="submit" name="update" value="Update" />
                                         </form>
                                         <form id="viewAirline" action="ViewAirlineServlet" method="GET" name="vievAirlineId">
-                                            <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> <input type="submit" name="view" value="View" />
+                                            <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
+                                            <input type="submit" name="view" value="View" />
 
                                         </form>
+                                        </div>
                                     </td>
                             </tr>
 

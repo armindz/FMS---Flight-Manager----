@@ -48,7 +48,7 @@ public class AirportRemoveServlet extends HttpServlet {
 	private void removeAirport(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		String airportCodename = request.getParameter("airportCodename");
+		String airportCodename = request.getParameter("product_id");
 		AirportManagementSystem airportms = new AirportManagementSystem();
 
 		

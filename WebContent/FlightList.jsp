@@ -118,19 +118,21 @@
                                                 <%= fetchDataToList.get(i).getFlightPrice() %>
                                             </td>
                                             <td>
+                                            <div class="tablefunctions">
                                                 <form id="remove" action="FlightRemoveServlet" method="GET" name="removeid">
                                                     <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                     <input type="submit" name="remove" value="Remove" />
-
+													</form>
                                                     <form id="update" action="FlightUpdateServlet" method="GET" name="updateid">
                                                         <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                         <input type="submit" name="update" value="Update" />
-
+														</form>
                                                         <form id="viewFlight" action="ViewFlightServlet" method="GET" name="vievFlightId">
                                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                             <input type="submit" name="view" value="View" />
 
                                                         </form>
+                                                        </div>
                                             </td>
                                     </tr>
 
