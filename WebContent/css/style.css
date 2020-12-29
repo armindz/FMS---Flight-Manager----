@@ -197,7 +197,8 @@
                 .flightform #airportCodenameSelect,
                 .flightform #destinationAirportCodenameSelect,
                 .flightform #seatRowSelect,
-                .airportform #airportTypeSelect {
+                .airportform #airportTypeSelect,
+                .ticketReservationForm [type="text"] {
                     font-family: Bubbler One, Verdana;
                     font-weight: 600;
                     border: 1px grey inset;
@@ -212,7 +213,8 @@
                 .airlineform .buttonform,
                 .airportform .buttonform,
                 .loginform .buttonform,
-                .flightform .buttonform {
+                .flightform .buttonform,
+                .ticketReservationForm .buttonform {
                     font-family: Bubbler One;
                     font-weight: 600;
                     font-size: 15px;
@@ -466,9 +468,9 @@
                 }
                 
                 .ticketPreview .ticketPreviewTable1 h5 {
-                    font-size: 30px;
+                    font-size: 27px;
                     margin: 2px 70px;
-                    padding: 10px;
+                    padding: 0px;
                 }
                 
                 .ticketPreview .ticketPreviewTable2 {
@@ -500,6 +502,37 @@
                     font-size: 15px;
                     font-family: Bubbler One;
                     margin-left: 10px;
+                }
+                
+                .ticketReservation {
+                    position: absolute;
+                    left: 1.5%;
+                    top: 500;
+                    background-color: silver;
+                    width: 97%;
+                    height: 50%;
+                    box-shadow: 5px 5px 15px rgba(100, 100, 100, 0.7);
+                }
+                
+                .ticketReservationForm {
+                    position: relative;
+                    float: left;
+                    width: 60%;
+                    height: 100%;
+                    background-color: rgb(163, 163, 163);
+                    font-family: Bubbler One, Tahoma;
+                    color: #333;
+                    font-weight: 900;
+                    text-align: center;
+                }
+                
+                .ticketReservationSeatPreview {
+                    float: right;
+                    position: relative;
+                    background-color: white;
+                    width: 39.72%;
+                    height: 100%;
+                    border-left: 4px grey solid;
                 }
                 /* End of main container at homepage */
                 
