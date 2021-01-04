@@ -1,16 +1,24 @@
+ <%@ page import="models.Flight" %>
+      <%@ page import="java.util.ArrayList" %>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+   
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="ISO-8859-1">
     <title>FMS - Book a flight</title>
     <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
-     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
 </head>
 
 
 <body>
-   
+    
 
 
     <header>
@@ -54,43 +62,44 @@
 
     <div class="ticketPreview">
 
+<% Flight flight = (Flight)request.getAttribute("flightData"); %>
         <div class="ticketPreviewTable1">
             <img class="ticketPreviewAirplaneIcon" src="img/icons/ticketpreviewicon.png">
             <h2>BOARDING PASS</h2>
             <div class="table1left">
 
                 <label for=" airportFROM ">FROM</label>
-                <h3 class="airportFROM " name="airportFROM "> SJJ </h3>
+                <h3 class="airportFROM " > <%= flight.getAirport().getAirportCodename() %> </h3>
 
 
 
                 <label for="name ">NAME</label>
-                <h5 class="name " name="name "> John Doe</h5>
+                <h5 class="name " > John Doe</h5>
 
                 <label for="flightID ">FLIGHT ID</label>
-                <h5 class="flightID " name="flightID "> 0145</h5>
+                <h5 class="flightID " ><%= flight.getFlight_id() %></h5>
 
                 <label for="date ">DATE</label>
-                <h5 class="DATE " name="DATE "> 22.5.2020</h5>
+                <h5 class="DATE " ><%= flight.getDateOfFlight().getTime() %></h5>
             </div>
 
             <div class="table1right ">
 
 
                 <label for="airportTO ">TO</label>
-                <h3 class="airportTO " name="airportTO "> BGR</h3>
+                <h3 class="airportTO " > <%= flight.getDestinationAirport().getAirportCodename() %></h3>
 
                 <label for="airline ">AIRLINE</label>
-                <h4 class="airline "> WZZ</h4>
+                <h4 class="airline "> <%=flight.getAirline().getAirlineCodename() %></h4>
 
                     <label for="seat ">SEAT</label>
-                    <h5 class="seat " name="seat "> C</h5>
+                    <h5 class="seat " > <%= flight.getSeatRow() %></h5>
 
-                    <label for="row ">ROW</label>
-                    <h5 class="row " name="row "> 6</h5>
+                    <label for="row ">NUMBER</label>
+                    <h5 class="row " > <%= flight.getSeatNumber() %></h5>
 
                     <label for="flightClass ">FLIGHT CLASS</label>
-                    <h5 class="flightClass " name="flightClass"> ECONOMY</h5>
+                    <h5 class="flightClass " > <%= flight.getFlightClass() %></h5>
             </div>
 
         </div>
@@ -98,29 +107,29 @@
             <h3> Boarding Pass</h3>
 
             <label for=" airportFROM ">FROM</label>
-            <h5 class="airportFROM " name="airportFROM "> SJJ </h5>
+            <h3 class="airportFROM " >  <%= flight.getAirport().getAirportCodename() %>  </h3>
 
                 <label for="airportTO ">TO</label>
-                <h5 class="airportTO " name="airportTO "> BGR</h5>
+                <h3 class="airportTO " ><%= flight.getDestinationAirport().getAirportCodename() %></h3>
                     <br/><br/><br/>
                     <label for="airline ">AIRLINE</label>
-                    <h5 class="airline "> WZZ</h5>
+                    <h4 class="airline "> <%=flight.getAirline().getAirlineCodename() %></h4>
                         <br/><br/><br/>
 
                         <label for="name ">NAME</label>
-                        <h5 class="name " name="name "> John Doe</h5>
+                        <h5 class="name " > John Doe</h5>
                         <br/><br/><br/>
                         <label for="flightID ">FLIGHT ID</label>
-                        <h5 class="flightID " name="flightID "> 0145</h5>
+                        <h5 class="flightID " ><%= flight.getFlight_id() %></h5>
                         <br/><br/><br/>
                         <label for="date ">DATE</label>
-                        <h5 class="DATE " name="DATE "> 22.5.2020</h5>
+                        <h5 class="DATE" ><%= flight.getDateOfFlight().getTime() %></h5>
                         <br/><br/><br/>
                         <label for="seat ">SEAT</label>
-                        <h5 class="seat " name="seat "> C</h5>
+                        <h5 class="seat " >  <%= flight.getSeatRow() %></h5>
 
                         <label for="row ">ROW</label>
-                        <h5 class="row " name="row "> 6</h5>
+                        <h5 class="row " ><%= flight.getSeatNumber() %></h5>
 
         </div>
 

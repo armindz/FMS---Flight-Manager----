@@ -395,7 +395,7 @@
                 .mainContainer a:hover {
                     background-color: rgba(26, 24, 24, 0.9);
                     color: silver;
-                    -webkit-animation: zoomin 1s 1;
+                    animation: zoomin 1s 1;
                     transition: .5s ease-out;
                 }
                 
@@ -404,7 +404,7 @@
                     width: 70%;
                     height: 400px;
                     position: relative;
-                    top: 70;
+                    top: 100;
                     padding: 0px;
                     margin: 0 auto;
                     display: flex;
@@ -478,7 +478,6 @@
                     background-position-x: -100px;
                     background-position-y: 40px;
                     width: 20%;
-                    /*   background-color: rgb(52, 121, 211);*/
                     border-top-right-radius: 20px;
                     border-bottom-right-radius: 20px;
                     border-left: rgba(224, 224, 224, 0.973) 5px dashed;
@@ -510,29 +509,44 @@
                     top: 500;
                     background-color: silver;
                     width: 97%;
-                    height: 50%;
+                    height: 80%;
                     box-shadow: 5px 5px 15px rgba(100, 100, 100, 0.7);
                 }
                 
                 .ticketReservationForm {
                     position: relative;
                     float: left;
-                    width: 60%;
-                    height: 100%;
+                    width: 50%;
+                    height: 90%;
                     background-color: rgb(163, 163, 163);
                     font-family: Bubbler One, Tahoma;
                     color: #333;
                     font-weight: 900;
                     text-align: center;
+                    padding: 25px;
                 }
                 
                 .ticketReservationSeatPreview {
                     float: right;
                     position: relative;
-                    background-color: white;
-                    width: 39.72%;
-                    height: 100%;
+                    background-color: rgb(250, 250, 250);
+                    width: 35%;
+                    height: 90%;
                     border-left: 4px grey solid;
+                    border-bottom-left-radius: 25% 100%;
+                    border-bottom-right-radius: 25% 100%;
+                    border-top-left-radius: 25% 100%;
+                    border-top-right-radius: 25% 100%;
+                    padding: 25px;
+                    margin: 0 25px;
+                }
+                
+                .ticketReservationSeatPreview #seatIcon {
+                    position: relative;
+                    display: inline-block;
+                    margin: 10px;
+                    width: 40px;
+                    height: auto;
                 }
                 /* End of main container at homepage */
                 
@@ -540,8 +554,7 @@
                     clear: both;
                     display: table;
                 }
-                
-                @-webkit-keyframes zoomin {
+                      @keyframes zoomin {
                     0% {
                         -webkit-transform: scale(1);
                     }
@@ -549,6 +562,7 @@
                         -webkit-transform: scale(1.05);
                     }
                 }
+                
                 
                 @keyframes fadein {
                     from {
