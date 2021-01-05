@@ -62,7 +62,7 @@
                     <h3 id="airlinelist">Airline list</h3>
                     <%!AirlineManagementSystem airlinems = new AirlineManagementSystem();%>
 
-                        <table style="width: 100%">
+                        <table class="airlineListTable" style="width: 100%">
                             <tr>
                                 <th>Airline Codename</th>
                                 <th>Airline Callsign</th>

@@ -182,9 +182,12 @@ String strDate= formatter.format(date);
 			<% BookingFlightTicket bft = new BookingFlightTicket();
 				FlightManagementSystem flightms = new FlightManagementSystem();
 				ArrayList <Seat> listOfSeats = flightms.getListOfSeats();
+				%>
+				<table class="seatIconTable">          
 				
+				<tr >
 				
-		
+				<% 
 					for(int i=0; i < listOfSeats.size();i++) {
 
 						if(listOfSeats.get(i).getFlightId()==flight.getFlight_id()) {
@@ -192,14 +195,37 @@ String strDate= formatter.format(date);
 					
 						
 					
-						%> <p><%= listOfSeats.get(i).getSeatRow()%></p><p><%= listOfSeats.get(i).getSeatNumber()%></p>
-						<img id="seatIcon" src="img/icons/seaticon.png"> <%
-						if(listOfSeats.get(i).getSeatNumber() == flight.getSeatNumber()) { %>
-						<p> pauza </p>  <%
+						%>
+						
+					
+    
+   
+  
+						<td>
+						
+							<img id="seatIcon" src="img/icons/seaticon.png">
+						<p><%= listOfSeats.get(i).getSeatRow() %></p>	<p><%= listOfSeats.get(i).getSeatNumber() %></p>
+						</td>
+						 <%
+							
+							if(listOfSeats.get(i).getSeatNumber() == flight.getSeatNumber()) {
+								
+								
+								%>
+						
+					</tr>
+					
+					
+						
+						 <%
 						}
+						%>
+						
+						 
+						<% 
 			}
 			}
-				%>
+				%> </table> 
 			
             
 

@@ -302,38 +302,58 @@
                     font-size: 25px;
                 }
                 /* Table used for displaying data from database at AirlineList.jsp AriportList.jsp and FlightList.jsp pages*/
-                
-                table,
-                th,
-                td {
+             
+               .flightListTable table,
+                .flightListTable th,
+               .flightListTable td,
+               .airlineListTable table,
+               .airlineListTable th,
+               .airlineListTable td,
+               .airportListTable table,
+               .airportListTable th,
+               .airportListTable td {
                     border: 1px solid #333;
                     border-collapse: collapse;
                 }
                 
-                th {
+                .flightListTable th,
+                .airportListTable th,
+                .airlineListTable th {
+                 
+                    background-color: rgba(54, 54, 54, 0.6);
+                    padding: 15px;
                     text-align: center;
                     font-family: Bubbler One, Verdana;
-                    font-weight: 900;
-                    background-color: rgba(54, 54, 54, 0.6)
+                    font-weight: 600;
+                    
                 }
+                .flightListTable td,
+                .airportListTable td,
+                .airlineListTable td {
+                 background-color: rgba(100, 100, 100, 0.5); 
+                 padding: 15px;
+                    text-align: center;
+                    font-family: Bubbler One, Verdana;
+                    font-weight: 600;
+                }
+              
                 
-                table {
+                
+               .flightListTable table,
+               .airportListTable table,
+               .airlineListTable table {
                     border-spacing: 5px;
                     background-color: rgba(100, 100, 100, 0.5);
                     border-radius: 6px;
                     width: 95%;
                 }
                 
-                th,
-                td {
-                    padding: 15px;
-                    text-align: center;
-                    font-family: Bubbler One, Verdana;
-                    font-weight: 600;
-                }
+              
                 /* Container of function buttons on table (Remove, Update, View) */
                 
-                .tablefunctions {
+               .flightListTable .tablefunctions,
+               .airportListTable .tablefunctions,
+               .airlineListTable .tablefunctions {
                     position: relevant;
                     width: auto;
                     display: flex;
@@ -566,21 +586,54 @@
                     border-top-right-radius: 25% 100%;
                     padding: 25px;
                     margin: 0 25px;
+                   	display: flex;
+  				    flex-direction: column;
+  				    
+ 				    
                 }
                 
                 .ticketReservationSeatPreview #seatIcon {
                     position: relative;
-                    display: inline-block;
-                    box-sizing: border-box;
                     margin: 5px;
                     width: 22px;
                     height: auto;
-                   
+                
                      
  
     
  
                 }
+                
+                
+           .ticketReservationSeatPreview .seatIconTable  {
+              position:relative;
+              border: 2px red solid;
+    			background-color:powderblue;
+    			width:80%;
+    			height:10%;
+    			margin: 2px;
+    			
+    			
+    		
+ 					}
+
+ 				
+ 				
+ 				.seatIconTable tr {
+ 				position:relative;
+ 				border :2px blue solid;
+ 				display:block;
+ 				float:left;
+ 				margin:5px;
+ 			
+ 				
+ 				}
+
+ 				.seatIconTable td {
+ 					display:block;
+				    
+						      
+ 					}
                 /* End of main container at homepage */
                 
                 .clearfix::after {

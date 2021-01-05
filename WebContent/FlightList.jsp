@@ -62,7 +62,7 @@
                         <%! FlightManagementSystem flightms = new FlightManagementSystem(); %>
                             <%! FlightDatabase flightdb = new FlightDatabase(); %>
 
-                                <table style="width:100%">
+                                <table class="flightListTable" style="width:100%">
                                     <tr>
 
                                         <th>Flight ID</th>

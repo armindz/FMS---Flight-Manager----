@@ -63,7 +63,7 @@
 	<h3 id="airportlist">Airport list</h3>
 	<%!AirportManagementSystem airportms = new AirportManagementSystem();%>
 
-	<table style="width: 100%">
+	<table class="airportListTable" style="width: 100%">
 		<tr>
 
 			<th>Airport Codename</th>
