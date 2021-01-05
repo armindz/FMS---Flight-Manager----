@@ -1,5 +1,11 @@
  <%@ page import="models.Flight" %>
+  <%@ page import="booking.BookingFlightTicket" %>
+   <%@ page import="management.FlightManagementSystem" %>
       <%@ page import="java.util.ArrayList" %>
+       <%@ page import="java.util.Date" %>
+       <%@ page import="java.text.SimpleDateFormat" %>
+       <%@ page import="models.Seat" %>
+       
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -63,6 +69,11 @@
     <div class="ticketPreview">
 
 <% Flight flight = (Flight)request.getAttribute("flightData"); %>
+	
+<% Date date = new Date();  
+SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy hh:mm");  
+String strDate= formatter.format(date);  
+ %>
         <div class="ticketPreviewTable1">
             <img class="ticketPreviewAirplaneIcon" src="img/icons/ticketpreviewicon.png">
             <h2>BOARDING PASS</h2>
@@ -74,13 +85,13 @@
 
 
                 <label for="name ">NAME</label>
-                <h5 class="name " > John Doe</h5>
+                <h5 class="name " > Armin Dzibric</h5>
 
                 <label for="flightID ">FLIGHT ID</label>
                 <h5 class="flightID " ><%= flight.getFlight_id() %></h5>
 
                 <label for="date ">DATE</label>
-                <h5 class="DATE " ><%= flight.getDateOfFlight().getTime() %></h5>
+                <h5 class="DATE " ><%= formatter.format(flight.getDateOfFlight().getTime()) %></h5>
             </div>
 
             <div class="table1right ">
@@ -90,7 +101,7 @@
                 <h3 class="airportTO " > <%= flight.getDestinationAirport().getAirportCodename() %></h3>
 
                 <label for="airline ">AIRLINE</label>
-                <h4 class="airline "> <%=flight.getAirline().getAirlineCodename() %></h4>
+                <h5 class="airline "> <%=flight.getAirline().getAirlineCodename() %></h5>
 
                     <label for="seat ">SEAT</label>
                     <h5 class="seat " > <%= flight.getSeatRow() %></h5>
@@ -107,23 +118,23 @@
             <h3> Boarding Pass</h3>
 
             <label for=" airportFROM ">FROM</label>
-            <h3 class="airportFROM " >  <%= flight.getAirport().getAirportCodename() %>  </h3>
+            <h5 class="airportFROM " >  <%= flight.getAirport().getAirportCodename() %>  </h5>
 
                 <label for="airportTO ">TO</label>
-                <h3 class="airportTO " ><%= flight.getDestinationAirport().getAirportCodename() %></h3>
+                <h5 class="airportTO " ><%= flight.getDestinationAirport().getAirportCodename() %></h5>
                     <br/><br/><br/>
                     <label for="airline ">AIRLINE</label>
-                    <h4 class="airline "> <%=flight.getAirline().getAirlineCodename() %></h4>
+                    <h5 class="airline "> <%=flight.getAirline().getAirlineCodename() %></h5>
                         <br/><br/><br/>
 
                         <label for="name ">NAME</label>
-                        <h5 class="name " > John Doe</h5>
+                        <h5 class="name " > Armin Dzibric</h5>
                         <br/><br/><br/>
                         <label for="flightID ">FLIGHT ID</label>
                         <h5 class="flightID " ><%= flight.getFlight_id() %></h5>
                         <br/><br/><br/>
                         <label for="date ">DATE</label>
-                        <h5 class="DATE" ><%= flight.getDateOfFlight().getTime() %></h5>
+                        <h5 class="DATE" ><%= formatter.format(flight.getDateOfFlight().getTime()) %></h5>
                         <br/><br/><br/>
                         <label for="seat ">SEAT</label>
                         <h5 class="seat " >  <%= flight.getSeatRow() %></h5>
@@ -152,7 +163,7 @@
                 <label for="name">Name:</label><br>
                 <input type="text" name="name" /> <br/><br>
 
-
+ 
                 <label for="seatRow">SEAT ROW:</label><br>
                 <input type="text" name="seatRow" /> <br/><br/>
 
@@ -167,8 +178,30 @@
         </div>
 
         <div class="ticketReservationSeatPreview">
+		
+			<% BookingFlightTicket bft = new BookingFlightTicket();
+				FlightManagementSystem flightms = new FlightManagementSystem();
+				ArrayList <Seat> listOfSeats = flightms.getListOfSeats();
+				
+				
+		
+					for(int i=0; i < listOfSeats.size();i++) {
 
-            <img id="seatIcon" src="img/icons/seaticon.png">
+						if(listOfSeats.get(i).getFlightId()==flight.getFlight_id()) {
+					
+					
+						
+					
+						%> <p><%= listOfSeats.get(i).getSeatRow()%></p><p><%= listOfSeats.get(i).getSeatNumber()%></p>
+						<img id="seatIcon" src="img/icons/seaticon.png"> <%
+						if(listOfSeats.get(i).getSeatNumber() == flight.getSeatNumber()) { %>
+						<p> pauza </p>  <%
+						}
+			}
+			}
+				%>
+			
+            
 
         </div>
 

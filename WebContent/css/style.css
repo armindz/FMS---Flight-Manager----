@@ -1,11 +1,15 @@
                 body {
-                    background-color: azure;
+                    background-color: white;
                     width: 100%;
                     background-image: url("../img/vbg.png");
-                    background-repeat: no-repeat;
-                    background-size: cover;
+                    -webkit-background-size: cover;
+					-moz-background-size: cover;
+					-o-background-size: cover;
+					background-size: cover;
                     opacity: 1;
                     animation: fadein 1 ease-in 0.2s;
+       
+					
                 }
                 /* START OF HEADER */
                 /* Logo on left side of header */
@@ -399,14 +403,27 @@
                     transition: .5s ease-out;
                 }
                 
+                
+                .bookAFlightContainer1 {
+                margin: 50px 5px;
+                position:absolute;
+                display:inline-block;
+                width:100%;
+                height:100%;
+                
+                }
+                
                 .ticketPreview {
                     background-color: white;
                     width: 70%;
                     height: 400px;
                     position: relative;
-                    top: 100;
+                    top: 100px;
+                    left: 15%;
                     padding: 0px;
-                    margin: 0 auto;
+                    
+                    margin-top:50px;
+                    margin-bottom: 100px;
                     display: flex;
                     justify-content: left;
                     border-radius: 20px;
@@ -415,15 +432,20 @@
                 }
                 
                 .ticketPreview .ticketPreviewAirplaneIcon {
-                    top: 50;
-                    left: 450;
-                    position: relative;
+                position: relative;
+                
+                    top: 50px;
+                    left: 53%;
                     width: 75px;
                     height: 75px;
                 }
                 
                 .ticketPreview .ticketPreviewTable1 {
-                    background-color: rgba(224, 224, 224, 0.973);
+                
+               
+              		  background-image: url("../img/ticketpreviewtable1bgr.jpg");
+              		opacity:0.9;
+                   /* background-color: rgba(224, 224, 224, 0.973);*/
                     width: 80%;
                     position: relative;
                     display: flex;
@@ -449,16 +471,16 @@
                     width: 50%;
                 }
                 
-                .ticketPreview .ticketPreviewTable1 .table1left .airportFrom {
+                .ticketPreview .ticketPreviewTable1 .table1left h3{
                     font-size: 50px;
                     text-align: center;
                     font-family: Tahoma;
-                    padding: 0px;
-                    margin: 40px;
+                    padding: 30px;
+                    margin: 10px;
                     color: #444;
                 }
-                
-                .ticketPreview .ticketPreviewTable1 .table1right .airportTo {
+              
+                .ticketPreview .ticketPreviewTable1 .table1right h3 {
                     font-family: Tahoma;
                     font-size: 50px;
                     text-align: center;
@@ -492,12 +514,15 @@
                 
                 .ticketPreview .ticketPreviewTable2 h5 {
                     font-family: Bubbler One;
+                    
                     font-size: 20px;
                     display: inline;
                     margin: 10px;
                 }
                 
                 .ticketPreview .ticketPreviewTable2 label {
+                font-weight: 600;
+                color:white;
                     font-size: 15px;
                     font-family: Bubbler One;
                     margin-left: 10px;
@@ -505,11 +530,13 @@
                 
                 .ticketReservation {
                     position: absolute;
+                    display:inline-block;
                     left: 1.5%;
-                    top: 500;
+                    top: 700px;
                     background-color: silver;
+                    margin-top: 20px;
                     width: 97%;
-                    height: 80%;
+                    height: 70%;
                     box-shadow: 5px 5px 15px rgba(100, 100, 100, 0.7);
                 }
                 
@@ -544,9 +571,15 @@
                 .ticketReservationSeatPreview #seatIcon {
                     position: relative;
                     display: inline-block;
-                    margin: 10px;
-                    width: 40px;
+                    box-sizing: border-box;
+                    margin: 5px;
+                    width: 22px;
                     height: auto;
+                   
+                     
+ 
+    
+ 
                 }
                 /* End of main container at homepage */
                 

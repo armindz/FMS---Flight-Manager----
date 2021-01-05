@@ -2,13 +2,14 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
 <head>
     <meta charset="ISO-8859-1">
     <title>FMS - Book a flight</title>
     <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
+    
+    
 </head>
 
 
