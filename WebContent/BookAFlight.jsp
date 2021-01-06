@@ -155,20 +155,20 @@ String strDate= formatter.format(date);
 
         <div class="ticketReservationForm">
 
-            <form class="ticketReservationForm" action="#" method="GET">
+            <form class="ticketReservationForm" action="BookingFlightTicketServlet" method="GET">
 
                 <label for="flightID">Flight ID:</label><br>
                 <input type="text" name="flightID" /><br/><br>
 
                 <label for="name">Name:</label><br>
                 <input type="text" name="name" /> <br/><br>
-
- 
+						
+ 				
                 <label for="seatRow">SEAT ROW:</label><br>
                 <input type="text" name="seatRow" /> <br/><br/>
 
                 <label for="seatNumber">SEAT NUMBER:</label><br>
-                <input type="text" name="seatRow" /> <br/><br/>
+                <input type="text" name="seatNumber" /> <br/><br/>
 
                 <input class="buttonform" type="submit" value="Create" />
 
@@ -192,20 +192,30 @@ String strDate= formatter.format(date);
 
 						if(listOfSeats.get(i).getFlightId()==flight.getFlight_id()) {
 					
-					
-						
-					
+							
 						%>
 						
 					
-    
-   
+
+ 
   
 						<td>
+				<% 	 if(bft.isSeatAvailable(listOfSeats.get(i).getFlightId(),listOfSeats.get(i).getSeatRow(), listOfSeats.get(i).getSeatNumber())){ %>	
+							  <img id="seatIcon" title= "<%=listOfSeats.get(i).getSeatRow()%> 
+							  <%=listOfSeats.get(i).getSeatNumber()%>"src="img/icons/seaticon.png"> 
+							  
+							  <% 
+						 } 
+				
+						else { %>
+							
+							<img id="seatIcon" title= "<%=listOfSeats.get(i).getSeatRow()%>  
+							<%=listOfSeats.get(i).getSeatNumber()%> "src="img/icons/seatnotavailableicon.png">
 						
-							<img id="seatIcon" src="img/icons/seaticon.png">
-						<p><%= listOfSeats.get(i).getSeatRow() %></p>	<p><%= listOfSeats.get(i).getSeatNumber() %></p>
+						<% } %>
+						
 						</td>
+						
 						 <%
 							
 							if(listOfSeats.get(i).getSeatNumber() == flight.getSeatNumber()) {
@@ -219,6 +229,8 @@ String strDate= formatter.format(date);
 						
 						 <%
 						}
+						 
+						
 						%>
 						
 						 

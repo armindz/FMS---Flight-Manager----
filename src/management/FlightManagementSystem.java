@@ -1,6 +1,7 @@
 package management;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class FlightManagementSystem {
 	
 	public void createFlight(String airlineCodename, String airportCodename, String destinationAirportCodename,
 			String flightClass, Calendar dateOfFlight, char flightSeatRows, int flightNumberOfSeatsPerRow,
-			double flightPrice) {
+			double flightPrice) throws SQLException {
 
 		Flight flight = new Flight(flightdb.generateFlightId(), airlinems.getAirlineFromCodename(airlineCodename),
 				airportms.getAirportFromCodename(airportCodename),
@@ -61,7 +62,7 @@ public class FlightManagementSystem {
 
 	
 
-	private void createSeatsAndStoreToDatabase(Flight flight, char seatRow, int numberOfSeatsPerRow) {
+	private void createSeatsAndStoreToDatabase(Flight flight, char seatRow, int numberOfSeatsPerRow) throws SQLException {
 
 		for (int i = 'A'; i <= seatRow; i++) {
 			for (int j = 1; j <= numberOfSeatsPerRow; j++) {
@@ -256,7 +257,7 @@ public class FlightManagementSystem {
 		return listOfFlights;
 	}
 
-	public void addFlightToDatabase(Flight flight) {
+	public void addFlightToDatabase(Flight flight) throws SQLException {
 
 		flightdb.storeToDatabase(flight);
 	}
@@ -266,7 +267,7 @@ public class FlightManagementSystem {
 		flightdb.deleteContentFromDatabase(flight_ID);
 	}
 
-	private void addSeatToDatabase(Seat seat) {
+	private void addSeatToDatabase(Seat seat) throws SQLException {
 
 		seatdb.storeToDatabase(seat);
 	}

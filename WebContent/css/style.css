@@ -423,7 +423,9 @@
                     transition: .5s ease-out;
                 }
                 
-                
+                    /* End of main container at homepage */
+                    
+                    
                 .bookAFlightContainer1 {
                 margin: 50px 5px;
                 position:absolute;
@@ -553,11 +555,11 @@
                     display:inline-block;
                     left: 1.5%;
                     top: 700px;
-                    background-color: silver;
+                   
                     margin-top: 20px;
                     width: 97%;
                     height: 70%;
-                    box-shadow: 5px 5px 15px rgba(100, 100, 100, 0.7);
+                   
                 }
                 
                 .ticketReservationForm {
@@ -587,17 +589,18 @@
                     padding: 25px;
                     margin: 0 25px;
                    	display: flex;
-  				    flex-direction: column;
+  				  box-shadow: 5px 5px 15px rgba(100, 100, 100, 0.7);
   				    
  				    
                 }
                 
-                .ticketReservationSeatPreview #seatIcon {
+                .ticketReservationSeatPreview .seatIconTable #seatIcon {
                     position: relative;
                     margin: 5px;
-                    width: 22px;
-                    height: auto;
-                
+                    max-width: 70%;
+                    max-height: auto;
+                     overflow:auto;
+               
                      
  
     
@@ -606,35 +609,50 @@
                 
                 
            .ticketReservationSeatPreview .seatIconTable  {
-              position:relative;
-              border: 2px red solid;
-    			background-color:powderblue;
-    			width:80%;
-    			height:10%;
-    			margin: 2px;
+             	 position:relative;
+              	
     			
-    			
-    		
+    			max-width:80%;
+    			max-height:100%;
+    			margin: 0 10%;
+    			padding: 15px;
+    			display:inline-block;
+    		    overflow:auto;
  					}
 
  				
  				
  				.seatIconTable tr {
  				position:relative;
- 				border :2px blue solid;
- 				display:block;
+ 				max-width:10%;
+ 				max-height: 100%;
+ 				
+ 			/*	display:block;*/
  				float:left;
- 				margin:5px;
+ 				margin: 0 5px;
+ 				left:10%;
+ 				
  			
  				
  				}
 
  				.seatIconTable td {
  					display:block;
-				    
+				    width: auto;
+				    height: auto;
 						      
  					}
-                /* End of main container at homepage */
+ 					
+ 					
+ 					
+ 					
+ 					
+ 					
+ 					
+ 					
+ 					
+ 					
+            
                 
                 .clearfix::after {
                     clear: both;

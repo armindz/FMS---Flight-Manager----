@@ -23,11 +23,12 @@ public class FlightDatabase {
 	AirlineManagementSystem airlinems = new AirlineManagementSystem();
 	AirportManagementSystem airportms = new AirportManagementSystem();
 
-	public void storeToDatabase(Flight flight) {
-
+	public void storeToDatabase(Flight flight) throws SQLException {
+		Connection conn = DatabaseConnection.getConnection();
+		
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoFlights);
 
 			preparedStmt.setInt(1, flight.getFlight_id()); // Flight_ID Column
@@ -53,7 +54,13 @@ public class FlightDatabase {
 			e.printStackTrace();
 		}
 
-	}
+		finally {
+			
+			 if(conn!=null)
+				  conn.close();
+				}
+		}
+	
 
 	public static int generateFlightId() { // mechanism for generating flight ID based on last stored ID in database
 

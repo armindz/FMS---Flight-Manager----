@@ -15,7 +15,7 @@ public class BookingFlightTicket {
 	private ArrayList<Seat> listOfSeats = flightms.getListOfSeats();
 	
 
-	public void bookAFlight(int flightId, String flightClass, char seatRow, int seatNumber) {
+	public void bookAFlight(int flightId, char seatRow, int seatNumber) {
 
 		if (isSeatAvailable(flightId, seatRow, seatNumber)) {
 			flightms.markSeatAsUnavailable(flightId, seatRow, seatNumber);
@@ -35,11 +35,15 @@ public class BookingFlightTicket {
 			char seatRowFromList = listOfSeats.get(i).getSeatRow();
 			int seatNumberFromList = listOfSeats.get(i).getSeatNumber();
 			boolean isSeatAvailableFromList = listOfSeats.get(i).isSeatAvailable();
-
+			
 			if ((flightIdFromList == flightId) && (seatRow == seatRowFromList) && (seatNumber == seatNumberFromList)
 					&& (isSeatAvailableFromList)) {
+			
 				return true;
 			}
+			
+		
+			
 		}
 
 		return false;
