@@ -1,10 +1,10 @@
 package management;
 
-import java.sql.Date;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
+
 
 import database.AirlineDatabase;
 import database.AirportDatabase;
@@ -19,7 +19,6 @@ public class FlightManagementSystem {
 
 	AirlineManagementSystem airlinems = new AirlineManagementSystem();
 	AirportManagementSystem airportms = new AirportManagementSystem();
-
 	AirlineDatabase airlinedb = new AirlineDatabase();
 	AirportDatabase airportdb = new AirportDatabase();
 	SeatDatabase seatdb = new SeatDatabase();
@@ -105,7 +104,7 @@ public class FlightManagementSystem {
 
 	}
 
-	private boolean isFlightDataUnique(Flight flight) {
+	private boolean isFlightDataUnique(Flight flight) { // mechanism for checking if forwarded flight is unique based on data from database
 
 		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through
 																			// given ArrayList
@@ -116,7 +115,7 @@ public class FlightManagementSystem {
 		return true;
 	}
 
-	private boolean isAirlineCodenameValid(String airlineCodename) {
+	private boolean isAirlineCodenameValid(String airlineCodename) { // mechanism for checking if forwarded airline codename is valid
 
 		ArrayList<Airline> listOfAirlines = airlinedb.fetchDatabaseContent(); // // return airline database content
 																				// through
@@ -131,7 +130,7 @@ public class FlightManagementSystem {
 		return false;
 	}
 
-	private boolean isAirportCodenameValid(String airportCodename) {
+	private boolean isAirportCodenameValid(String airportCodename) { // mechanism for checking if forwarded airport codename is valid
 
 		ArrayList<Airport> listOfAirports = airportdb.fetchDatabaseContent(); // return airport database content through
 																				// given ArrayList
@@ -147,7 +146,7 @@ public class FlightManagementSystem {
 		return false;
 	}
 
-	private boolean isSeatRowValid(char seatRow) {
+	private boolean isSeatRowValid(char seatRow) { // mechanism for checking if forwarded seat row is valid
 
 		if (seatRow == 'A' || seatRow == 'B' || seatRow == 'C' || seatRow == 'D' || seatRow == 'E' || seatRow == 'F') {
 			return true;
@@ -236,7 +235,7 @@ public class FlightManagementSystem {
 	}
 
 	
-	public ArrayList<Seat> fetchSeatDatabaseContentToList() {
+	public ArrayList<Seat> fetchSeatDatabaseContentToList() { // fetch seat database content and return as ArrayList
 
 		ArrayList<Seat> listOfSeats = seatdb.fetchDatabaseContent();
 		if (listOfSeats.isEmpty()) {
@@ -246,7 +245,7 @@ public class FlightManagementSystem {
 		return listOfSeats;
 	}
 
-	public ArrayList<Flight> fetchFlightDatabaseContentToList() {
+	public ArrayList<Flight> fetchFlightDatabaseContentToList() { // fetch flight database content and return as ArrayList
 
 		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent();
 
@@ -262,12 +261,13 @@ public class FlightManagementSystem {
 		flightdb.storeToDatabase(flight);
 	}
 
-	public void removeFlightFromDatabase(int flight_ID) {
+	public void removeFlightFromDatabase(int flight_ID) {    // delete flight content based on forwarded flight ID and delete seats related to flight
 
-		flightdb.deleteContentFromDatabase(flight_ID);
+		flightdb.deleteContentFromDatabase(flight_ID);	
+		seatdb.deleteContentFromDatabase(flight_ID); 
 	}
 
-	private void addSeatToDatabase(Seat seat) throws SQLException {
+	private void addSeatToDatabase(Seat seat) throws SQLException { // add seat to database
 
 		seatdb.storeToDatabase(seat);
 	}

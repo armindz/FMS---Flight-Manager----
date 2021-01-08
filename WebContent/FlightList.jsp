@@ -112,7 +112,7 @@
                                                 <%= fetchDataToList.get(i).getSeatNumber() %>
                                             </td>
                                             <td>
-                                                <%= fetchDataToList.get(i).getFlightPrice() %>
+                                                <%= fetchDataToList.get(i).getFlightPrice() %> KM
                                             </td>
                                             <td>
                                             <div class="tablefunctions">

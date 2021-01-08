@@ -76,6 +76,7 @@ String strDate= formatter.format(date);
  %>
         <div class="ticketPreviewTable1">
             <img class="ticketPreviewAirplaneIcon" src="img/icons/ticketpreviewicon.png">
+            <img class="barcode" src="img/icons/barcode.png">
             <h2>BOARDING PASS</h2>
             <div class="table1left">
 
@@ -92,6 +93,9 @@ String strDate= formatter.format(date);
 
                 <label for="date ">DATE</label>
                 <h5 class="DATE " ><%= formatter.format(flight.getDateOfFlight().getTime()) %></h5>
+                
+                <label for="flightPrice ">PRICE</label>
+                        <h5 class="flightPrice " ><%= flight.getFlightPrice() %> KM</h5>
             </div>
 
             <div class="table1right ">
@@ -132,6 +136,9 @@ String strDate= formatter.format(date);
                         <br/><br/><br/>
                         <label for="flightID ">FLIGHT ID</label>
                         <h5 class="flightID " ><%= flight.getFlight_id() %></h5>
+                        <label for="flightPrice ">PRICE</label>
+                        <h5 class="flightPrice " ><%= flight.getFlightPrice() %> KM</h5>
+                        
                         <br/><br/><br/>
                         <label for="date ">DATE</label>
                         <h5 class="DATE" ><%= formatter.format(flight.getDateOfFlight().getTime()) %></h5>
@@ -155,7 +162,7 @@ String strDate= formatter.format(date);
 
         <div class="ticketReservationForm">
 
-            <form class="ticketReservationForm" action="BookingFlightTicketServlet" method="GET">
+            <form class="ticketReservationForm1" action="BookingFlightTicketServlet" method="GET">
 
                 <label for="flightID">Flight ID:</label><br>
                 <input type="text" name="flightID" /><br/><br>
