@@ -124,7 +124,7 @@
                                                         <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                         <input type="submit" name="update" value="Update" />
 														</form>
-                                                        <form id="viewFlight" action="BookAFlight" method="GET" name="vievFlightId">
+                                                        <form id="flightID" action="BookAFlight" method="GET" name="vievFlightId">
                                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                             <input type="submit" name="view" value="View" />
 
