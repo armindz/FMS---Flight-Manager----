@@ -1,6 +1,6 @@
     body {
         background-color: white;
-        width: 100%;
+        width: 100vw;
         background-image: url("../img/vbg.png");
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -203,7 +203,8 @@
     .flightform #destinationAirportCodenameSelect,
     .flightform #seatRowSelect,
     .airportform #airportTypeSelect,
-    .ticketReservationForm [type="text"] {
+    .ticketReservationForm [type="text"],
+    .ticketReservationForm #flightIdSelect {
         font-family: Bubbler One, Verdana;
         font-weight: 600;
         border: 1px grey inset;
@@ -604,6 +605,8 @@
         border-radius: 6px;
         box-shadow: 5px 5px 15px rgba(100, 100, 100, 0.7);
     }
+    
+   
     /* Visual seat availability preview */
     
     .ticketReservationSeatPreview {
@@ -698,9 +701,11 @@
      .flightListTable #airlineFromList [ type="submit"],
      .flightListTable #airportFromList [ type="submit"],
      .flightListTable #destinationAirportFromList [ type="submit"],
-     .flightListTable #viewFlightID [type="submit"]
+     .flightListTable #viewFlightID [type="submit"],
+     .airlineListTable #airlineFromList [ type="submit"]
+  
      {
-     text-decoration: none;
+     text-decoration: underline;
      font-family: Bubbler One;
      background-color: transparent;
      font-weight: 600;
@@ -708,6 +713,9 @@
      font-size:17px;
      outline:none;
      }
+     
+     
+    
     
     .clearfix::after {
         clear: both;

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-2"
 	pageEncoding="ISO-8859-2"%>
 <%@page import="models.Flight"%>
+<%@page import="models.Airline" %>
 <%@page import="management.FlightManagementSystem"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -60,14 +61,14 @@
 			</form>
 		</div>
 	</header>
-
+<% Airline airline = (Airline)request.getAttribute("airlineData"); %>
 	<div class="viewAirlineContainer">
 
 		<div class="airlineDataPreview">
 
-			<p>Full name: Turkish Airlines</p>
-			<p>Codename: TRK</p>
-			<p>Country: Turkey</p>
+			<p>Full name: <%=airline.getAirlineCallsign()%> </p>
+			<p>Codename: <%=airline.getAirlineCodename()%></p>
+			<p>Country: <%=airline.getAirlineCountry()%></p>
 
 		</div>
 
@@ -98,6 +99,8 @@
 						for (int i = 0; i < fetchDataToList.size(); i++)
 
 						{
+							
+							if(fetchDataToList.get(i).getAirline().getAirlineCodename().equals(airline.getAirlineCodename())) {
 					%>
 
 					<td>
@@ -174,6 +177,7 @@
 				</tr>
 
 				<%
+							}
 				}
 				} catch (Exception e) {
 				%>

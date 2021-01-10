@@ -87,18 +87,49 @@
  						
  						{       %>
 
-                                            <td>
-                                                <%= fetchDataToList.get(i).getFlight_id() %>
-                                            </td>
-                                            <td>
-                                                <%= fetchDataToList.get(i).getAirline().getAirlineCodename() %>
-                                            </td>
-                                            <td>
-                                                <%= fetchDataToList.get(i).getAirport().getAirportCodename() %>
-                                            </td>
-                                            <td>
-                                                <%= fetchDataToList.get(i).getDestinationAirport().getAirportCodename() %>
-                                            </td>
+                                          <td>
+						<form id="viewFlightID" action="BookAFlight" method="GET"
+							name="vievFlightId">
+							<input type="hidden" name="product_id"
+								value="<%=fetchDataToList.get(i).getFlight_id()%>" /> <input
+								type="submit" name="view"
+								value="<%=fetchDataToList.get(i).getFlight_id()%>" />
+						</form>
+
+					</td>
+					<td>
+						<form id="airlineFromList" action="AirlinePreviewServlet"
+							method="GET" name="airlineFromList">
+							<input type="hidden" name="product_id"
+								value="<%=fetchDataToList.get(i).getAirline().getAirlineCodename()%>" />
+							<input type="submit" name="airline"
+								value="<%=fetchDataToList.get(i).getAirline().getAirlineCodename()%>" />
+						</form>
+
+					</td>
+					<td>
+
+						<form id="airportFromList" action="AirportPreviewServlet"
+							method="GET" name="airportFromList">
+							<input type="hidden" name="product_id"
+								value="<%=fetchDataToList.get(i).getAirport().getAirportCodename()%>" />
+							<input type="submit" name="airport"
+								value="<%=fetchDataToList.get(i).getAirport().getAirportCodename()%>" />
+						</form>
+
+					</td>
+					<td>
+
+						<form id="destinationAirportFromList"
+							action="AirportPreviewServlet" method="GET"
+							name="destinationAirportFromList">
+							<input type="hidden" name="product_id"
+								value="<%=fetchDataToList.get(i).getDestinationAirport().getAirportCodename()%>" />
+							<input type="submit" name="destinationAirport"
+								value="<%=fetchDataToList.get(i).getDestinationAirport().getAirportCodename()%>" />
+						</form>
+
+					</td>
                                             <td>
                                                 <%= fetchDataToList.get(i).getFlightClass() %>
                                             </td>
@@ -124,7 +155,7 @@
                                                         <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                         <input type="submit" name="update" value="Update" />
 														</form>
-                                                        <form id="flightID" action="BookAFlight" method="GET" name="vievFlightId">
+                                                        <form id="viewFlight" action="BookAFlight" method="GET" name="viewFlight">
                                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getFlight_id()%>" />
                                                             <input type="submit" name="view" value="View" />
 

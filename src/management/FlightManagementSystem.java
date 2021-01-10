@@ -10,6 +10,7 @@ import database.AirlineDatabase;
 import database.AirportDatabase;
 import database.FlightDatabase;
 import database.SeatDatabase;
+import database.FlightTicketDatabase;
 import models.Airline;
 import models.Airport;
 import models.Flight;
@@ -23,6 +24,7 @@ public class FlightManagementSystem {
 	AirportDatabase airportdb = new AirportDatabase();
 	SeatDatabase seatdb = new SeatDatabase();
 	FlightDatabase flightdb = new FlightDatabase();
+	FlightTicketDatabase flightTicketdb = new FlightTicketDatabase();
 
 	
 	
@@ -265,6 +267,7 @@ public class FlightManagementSystem {
 
 		flightdb.deleteContentFromDatabase(flight_ID);	
 		seatdb.deleteContentFromDatabase(flight_ID); 
+		flightTicketdb.deleteAllContentFromDatabaseRelatedToSpecificFlight(flight_ID);
 	}
 
 	private void addSeatToDatabase(Seat seat) throws SQLException { // add seat to database

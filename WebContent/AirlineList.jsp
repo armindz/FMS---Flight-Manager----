@@ -57,7 +57,7 @@
 
 
 
-                    <input type="submit" value="Submit" />
+                   
 
                     <h3 id="airlinelist">Airline list</h3>
                     <%!AirlineManagementSystem airlinems = new AirlineManagementSystem();%>
@@ -76,9 +76,15 @@
 	
 			for (int i = 0; i < fetchDataToList.size(); i++) {
 			%>
-                                    <td>
-                                        <%=fetchDataToList.get(i).getAirlineCodename()%>
-                                    </td>
+									<td>
+                                   <form id="airlineFromList" action="AirlinePreviewServlet"
+										method="GET" name="airlineFromList">
+										<input type="hidden" name="product_id"
+										value="<%=fetchDataToList.get(i).getAirlineCodename()%>" />
+										<input type="submit" name="airline"
+										value="<%=fetchDataToList.get(i).getAirlineCodename()%>" />
+									</form>
+									</td>
                                     <td>
                                         <%=fetchDataToList.get(i).getAirlineCallsign()%>
                                     </td>
@@ -95,7 +101,7 @@
                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
                                             <input type="submit" name="update" value="Update" />
                                         </form>
-                                        <form id="viewAirline" action="ViewAirlineServlet" method="GET" name="vievAirlineId">
+                                        <form id="viewAirline" action="AirlinePreviewServlet" method="GET" name="vievAirlineId">
                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
                                             <input type="submit" name="view" value="View" />
 
