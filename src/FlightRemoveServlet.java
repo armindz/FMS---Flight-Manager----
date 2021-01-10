@@ -51,6 +51,8 @@ public class FlightRemoveServlet extends HttpServlet {
 		FlightManagementSystem flightms = new FlightManagementSystem();
 
 		int flightID = Integer.parseInt(request.getParameter("product_id"));
+		char seatRow = request.getParameter("seatRow").charAt(0);
+		int seatNumber = Integer.valueOf(request.getParameter("seatNumber"));
 		flightms.removeFlightFromDatabase(flightID);
 		response.sendRedirect("FlightList.jsp");
 	}

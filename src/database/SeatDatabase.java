@@ -12,11 +12,10 @@ public class SeatDatabase {
 	private static String statementToUpdateSeatsData = "UPDATE seats set isSeatAvailable= ? where flight_ID=? AND seatRow= ? AND seatNumber= ?";
 	private static String statementToDeleteDataFromSeats = "DELETE from seats where flight_ID=?";
 
-	public void storeToDatabase(Seat seat) throws SQLException {
-		Connection conn = DatabaseConnection.getConnection();
-		try {
+	public void storeToDatabase(Seat seat) {
 
-			
+		try {
+			Connection conn = DatabaseConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoSeats);
 
 			preparedStmt.setInt(1, seat.getFlightId()); // FlightID Column
@@ -34,12 +33,6 @@ public class SeatDatabase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		finally {
-			
-			 if(conn!=null)
-				  conn.close();
-				}
 
 	}
 
@@ -60,11 +53,11 @@ public class SeatDatabase {
 
 				seats.add(seat);
 			}
+			conn.close();
 		}
 
 		catch (Exception e) {
 
-			System.out.println("Something went wrong with fetching database content (SeatDatabase)");
 			e.printStackTrace();
 		}
 		return seats;

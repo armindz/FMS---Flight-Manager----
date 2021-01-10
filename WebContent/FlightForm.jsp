@@ -10,7 +10,7 @@
 
                         <head>
                             <meta charset="ISO-8859-1">
-                            <title>FMS - Flight</title>
+                            <title>FMS - Create Flight</title>
                             <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
                              <link rel="stylesheet" type="text/css" href="css/style.css">
                             <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
@@ -26,7 +26,7 @@
                                 <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
                                 <div class="navbarsections">
                                     <div class="dropdown">
-                                        <button class="dropbtn">Create</button>
+                                        <button class="dropbtn">Create &#11206;</button>
                                         <div class="dropdown-content">
                                             <a href="AirlineForm.html">Airline</a>
                                             <a href="AirportForm.html">Airport</a>
@@ -35,7 +35,7 @@
                                     </div>
 
                                     <div class="dropdown">
-                                        <button class="dropbtn">List</button>
+                                        <button class="dropbtn">List &#11206;</button>
                                         <div class="dropdown-content">
                                             <a href="AirlineList.jsp">Airline</a>
                                             <a href="AirportList.jsp">Airport</a>
@@ -70,7 +70,7 @@
          <%! AirlineManagementSystem airlinems = new AirlineManagementSystem(); %>
          <% ArrayList <Airline> fetchAirlineDataToList = airlinems.fetchDatabaseContentToList(); 
       		for(int i=0; i < fetchAirlineDataToList.size(); i++) { %>
-   			 <option value="<%= fetchAirlineDataToList.get(i).getAirlineCodename()%>"><%= fetchAirlineDataToList.get(i).getAirlineCodename()%></option>
+   			 <option value="<%= fetchAirlineDataToList.get(i).getAirlineCodename()%>"><%= fetchAirlineDataToList.get(i).getAirlineCodename()%> - <%=fetchAirlineDataToList.get(i).getAirlineCallsign() %></option>
    			 
    			 <% }  %>
    		
@@ -82,7 +82,7 @@
          <%! AirportManagementSystem airportms = new AirportManagementSystem(); %>
          <% ArrayList <Airport> fetchAirportDataToList = airportms.fetchDatabaseContentToList(); 
       		for(int i=0; i < fetchAirportDataToList.size(); i++) { %>
-   			 <option value="<%= fetchAirportDataToList.get(i).getAirportCodename()%>"><%= fetchAirportDataToList.get(i).getAirportCodename()%></option>
+   			 <option value="<%= fetchAirportDataToList.get(i).getAirportCodename()%>"><%= fetchAirportDataToList.get(i).getAirportCodename()%> - <%= fetchAirportDataToList.get(i).getAirportFullname() %></option>
    			 
    			 <% }  %>
    			  </select> <br/><br/>
@@ -90,7 +90,7 @@
                                 <select name="destinationAirportCodename" id="destinationAirportCodenameSelect">
 
       	<%	for(int i=0; i < fetchAirportDataToList.size(); i++) { %>
-   			 <option value="<%= fetchAirportDataToList.get(i).getAirportCodename()%>"><%= fetchAirportDataToList.get(i).getAirportCodename()%></option>
+   			 <option value="<%= fetchAirportDataToList.get(i).getAirportCodename()%>"><%= fetchAirportDataToList.get(i).getAirportCodename()%> - <%= fetchAirportDataToList.get(i).getAirportFullname() %></option>
    			 
    			 <% }  %>
    			  </select> <br/><br/>

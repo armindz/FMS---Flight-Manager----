@@ -51,7 +51,7 @@ public class FlightManagementSystem {
 
 	}
 	private boolean isFlightDataValid(Flight flight, char flightSeatRows, String airlineCodename,
-			String airportCodename, String destinationAirportCodename) {
+			String airportCodename, String destinationAirportCodename) throws SQLException {
 
 		if (isFlightDataUnique(flight) && isSeatRowValid(flightSeatRows) && isAirlineCodenameValid(airlineCodename)
 				&& isAirportCodenameValid(airportCodename) && isAirportCodenameValid(destinationAirportCodename)) {
@@ -106,7 +106,7 @@ public class FlightManagementSystem {
 
 	}
 
-	private boolean isFlightDataUnique(Flight flight) { // mechanism for checking if forwarded flight is unique based on data from database
+	private boolean isFlightDataUnique(Flight flight) throws SQLException { // mechanism for checking if forwarded flight is unique based on data from database
 
 		ArrayList<Flight> listOfFlights = flightdb.fetchDatabaseContent(); // return flight database content through
 																			// given ArrayList
@@ -258,12 +258,12 @@ public class FlightManagementSystem {
 		return listOfFlights;
 	}
 
-	public void addFlightToDatabase(Flight flight) throws SQLException {
+	public void addFlightToDatabase(Flight flight) throws SQLException  {
 
 		flightdb.storeToDatabase(flight);
 	}
 
-	public void removeFlightFromDatabase(int flight_ID) {    // delete flight content based on forwarded flight ID and delete seats related to flight
+	public void removeFlightFromDatabase(int flight_ID) throws SQLException {    // delete flight content based on forwarded flight ID and delete seats related to flight
 
 		flightdb.deleteContentFromDatabase(flight_ID);	
 		seatdb.deleteContentFromDatabase(flight_ID); 

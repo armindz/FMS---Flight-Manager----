@@ -57,6 +57,7 @@ public class AirportDatabase {
 
 				airports.add(airport);
 			}
+			conn.close();
 		}
 
 		catch (Exception e) {

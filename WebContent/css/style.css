@@ -9,6 +9,11 @@
         opacity: 1;
         animation: fadein 1 ease-in 0.2s;
     }
+    
+    option {
+    
+    font-weight:600;
+    }
     /* START OF HEADER */
     /* Logo on left side of header */
     
@@ -36,6 +41,7 @@
         border-radius: 1px;
         z-index: 99;
         margin-bottom: 100px;
+        
     }
     /* Dropdown Button of navigation sections */
     
@@ -206,7 +212,7 @@
     .ticketReservationForm [type="text"],
     .ticketReservationForm #flightIdSelect {
         font-family: Bubbler One, Verdana;
-        font-weight: 600;
+        font-weight: 900;
         border: 1px grey inset;
         border-radius: 10px;
         width: 200px;
@@ -567,13 +573,14 @@
     /* TICKET RESERVATION CONTAINER*/
     
     .ticketReservation {
-        position: absolute;
+        
         display: inline-block;
         left: 1.5%;
         top: 700px;
         margin-top: 20px;
         width: 97%;
         height: 70%;
+        padding: 50px 0px;
     }
     /*Form for booking ticket */
     
@@ -712,6 +719,15 @@
      border: none;
      font-size:17px;
      outline:none;
+     }
+     
+     .flightTicketTable {
+     clear:both;
+     display:inline-block;
+     position: relative;
+     width:100%;
+     top:90%;
+     display:block;
      }
      
      

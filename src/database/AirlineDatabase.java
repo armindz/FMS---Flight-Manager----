@@ -14,8 +14,8 @@ public class AirlineDatabase {
 	private static String statementToUpdateAirlinesData = "UPDATE airlines set Airline_Callsign= ?, Airline_Country = ? where  Airline_Codename= ? ";
 	private static String statementToDeleteDataFromAirlines = "DELETE from airlines where Airline_Codename=?";
 
-	public void storeToDatabase(Airline airline) {
-		
+	public void storeToDatabase(Airline airline) throws SQLException {
+
 		try {
 
 			Connection conn = DatabaseConnection.getConnection();
@@ -34,13 +34,15 @@ public class AirlineDatabase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
-	public ArrayList<Airline> fetchDatabaseContent() { // mechanism for fetching content from database and returning as ArrayList
-	
+	public ArrayList<Airline> fetchDatabaseContent() { // mechanism for fetching content from database and returning as
+														// ArrayList
+
 		ArrayList<Airline> airlines = new ArrayList<>();
 		try {
-			
+
 			Connection conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfAirlines);
@@ -48,14 +50,14 @@ public class AirlineDatabase {
 			while (rset.next()) {
 				Airline airline = new Airline(rset.getString("Airline_Codename"), rset.getString("Airline_Callsign"),
 						rset.getString("Airline_Country"));
-				
+
 				airlines.add(airline);
 			}
+			conn.close();
 		}
 
 		catch (Exception e) {
 
-			System.out.println("Something went wrong");
 			e.printStackTrace();
 		}
 		return airlines;
@@ -64,13 +66,13 @@ public class AirlineDatabase {
 	public void updateDatabaseContent(String Airline_Codename, String Airline_Callsign, String Airline_Country) {
 
 		try {
-			
+
 			Connection conn = DatabaseConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateAirlinesData);
-			
+
 			preparedStmt.setString(1, Airline_Callsign); // update Airline_Callsign column
 			preparedStmt.setString(2, Airline_Country); // update Airline_Country column
-			preparedStmt.setString(3,  Airline_Codename);
+			preparedStmt.setString(3, Airline_Codename);
 			preparedStmt.executeUpdate();
 
 			conn.close();

@@ -23,12 +23,11 @@ public class FlightDatabase {
 	AirlineManagementSystem airlinems = new AirlineManagementSystem();
 	AirportManagementSystem airportms = new AirportManagementSystem();
 
-	public void storeToDatabase(Flight flight) throws SQLException {
-		Connection conn = DatabaseConnection.getConnection();
-		
+	public void storeToDatabase(Flight flight) {
+
 		try {
 
-			
+			Connection conn = DatabaseConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoFlights);
 
 			preparedStmt.setInt(1, flight.getFlight_id()); // Flight_ID Column
@@ -54,13 +53,7 @@ public class FlightDatabase {
 			e.printStackTrace();
 		}
 
-		finally {
-			
-			 if(conn!=null)
-				  conn.close();
-				}
-		}
-	
+	}
 
 	public static int generateFlightId() { // mechanism for generating flight ID based on last stored ID in database
 
@@ -78,60 +71,59 @@ public class FlightDatabase {
 					flightID++;
 				}
 			}
+			conn.close();
 			return flightID;
 		}
 
 		catch (Exception e) {
-			System.out.println("Something went wrong with generating Flight_ID");
 			e.printStackTrace();
 		}
+
 		return 0;
 	}
 
-	public ArrayList<Flight> fetchDatabaseContent() { // mechanism for fetching content from database and returning as ArrayList
-				
+	public ArrayList<Flight> fetchDatabaseContent() { // mechanism for fetching content from database and returning as
+														// ArrayList
+
 		ArrayList<Flight> flights = new ArrayList<>();
+
 		try {
-			
 			Connection conn = DatabaseConnection.getConnection();
+
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfFlights);
-			
-			
+
 			flights.clear();
 			while (rset.next()) {
-				
-				
-				
-		
-				
+
 				Calendar cal = Calendar.getInstance();
 				Timestamp timestamp = rset.getTimestamp("Date_of_flight");
 				cal.setTime(timestamp);
-				
+
 				// check if airline is not null (may be deleted)
-				if ( airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")) != null &&
-						airportms.getAirportFromCodename(rset.getString("Airport_Codename")) != null &&
-						airportms.getAirportFromCodename(rset.getString("destinationAirport")) != null) {
-					
-					
-				Flight flight = new Flight(rset.getInt("flight_ID"), airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")),
-						airportms.getAirportFromCodename(rset.getString("Airport_Codename")),
-						airportms.getAirportFromCodename(rset.getString("destinationAirport")),
-						rset.getString("flightclass"), cal, rset.getString("seatRow").charAt(0),
-						rset.getInt("seatNumber"), rset.getDouble("flight_Price"));
-				
-				flights.add(flight);
-				System.out.println(flight);
+				if (airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")) != null
+						&& airportms.getAirportFromCodename(rset.getString("Airport_Codename")) != null
+						&& airportms.getAirportFromCodename(rset.getString("destinationAirport")) != null) {
+
+					Flight flight = new Flight(rset.getInt("flight_ID"),
+							airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")),
+							airportms.getAirportFromCodename(rset.getString("Airport_Codename")),
+							airportms.getAirportFromCodename(rset.getString("destinationAirport")),
+							rset.getString("flightclass"), cal, rset.getString("seatRow").charAt(0),
+							rset.getInt("seatNumber"), rset.getDouble("flight_Price"));
+
+					flights.add(flight);
+					System.out.println(flight);
 				}
 			}
+			conn.close();
 		}
 
 		catch (Exception e) {
 
-			System.out.println("Something went wrong");
 			e.printStackTrace();
 		}
+
 		return flights;
 	}
 
@@ -140,6 +132,7 @@ public class FlightDatabase {
 			double flight_Price) {
 
 		Timestamp timestamp = new Timestamp(Date_of_flight.getTimeInMillis());
+
 		try {
 
 			Connection conn = DatabaseConnection.getConnection();
@@ -164,6 +157,7 @@ public class FlightDatabase {
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
+
 	}
 
 	public void deleteContentFromDatabase(int flight_ID) { // deleting from database content found using flight_ID as it
@@ -184,6 +178,7 @@ public class FlightDatabase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }

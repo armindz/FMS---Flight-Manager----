@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -38,13 +39,13 @@ public class UserDatabase {
 		}
 	}
 
-	public ArrayList<User> fetchDatabaseContent() { // mechanism for fetching content from database and returning as
-													// ArrayList
+	public ArrayList<User> fetchDatabaseContent() { // mechanism for fetching content from database
+													// and returning as
+		// ArrayList
 
 		ArrayList<User> users = new ArrayList<>();
 
 		try {
-
 			Connection conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfUsers);
@@ -53,24 +54,25 @@ public class UserDatabase {
 
 				users.add(user);
 			}
+
+			conn.close();
 		}
 
 		catch (Exception e) {
 
-			System.out.println("Something went wrong");
 			e.printStackTrace();
 		}
+
 		return users;
 	}
 
 	public void updateDatabaseContent(String username, String password) {
 
 		try {
-
 			Connection conn = DatabaseConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateUsersData);
 
-			preparedStmt.setString(1, username); // 
+			preparedStmt.setString(1, username); //
 			preparedStmt.setString(2, password); // update password column
 
 			preparedStmt.executeUpdate();
@@ -97,12 +99,11 @@ public class UserDatabase {
 		}
 
 	}
-	
-	
-	public int generateUserID() { // mechanism for generating userID based on last stored ID in database
+
+	public int generateUserID() { // mechanism for generating userID based on last stored ID in
+									// database
 
 		try {
-
 			Connection conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfUsers);
@@ -115,6 +116,7 @@ public class UserDatabase {
 					userID++;
 				}
 			}
+			conn.close();
 			return userID;
 		}
 
@@ -122,6 +124,7 @@ public class UserDatabase {
 			System.out.println("Something went wrong with generating userID");
 			e.printStackTrace();
 		}
+
 		return 0;
 	}
 

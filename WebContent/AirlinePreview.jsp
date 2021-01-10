@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>FMS - Flight Management System</title>
+<title>FMS - Airline</title>
 <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='https://fonts.googleapis.com/css?family=Bubbler One '
@@ -33,7 +33,7 @@
 			src="img/icons/fms transparent.png"></a>
 		<div class="navbarsections">
 			<div class="dropdown">
-				<button class="dropbtn">Create</button>
+				<button class="dropbtn">Create &#11206;</button>
 				<div class="dropdown-content">
 					<a href="AirlineForm.html">Airline</a> <a href="AirportForm.html">Airport</a>
 					<a href="FlightForm.html">Flight</a>
@@ -41,7 +41,7 @@
 			</div>
 
 			<div class="dropdown">
-				<button class="dropbtn">List</button>
+				<button class="dropbtn">List &#11206;</button>
 				<div class="dropdown-content">
 					<a href="AirlineList.jsp">Airline</a> <a href="AirportList.jsp">Airport</a>
 					<a href="FlightList.jsp">Flight</a>
@@ -50,7 +50,7 @@
 
 
 			<div class="dropdown">
-				<button class="dropbtn">Modify</button>
+				<button class="dropbtn">Modify &#11206;</button>
 				<div class="dropdown-content">
 					<a href="#">Airline</a> <a href="#">Airport</a> <a href="#">Flight</a>
 				</div>

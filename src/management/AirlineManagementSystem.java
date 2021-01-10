@@ -1,5 +1,6 @@
 package management;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -96,7 +97,12 @@ public class AirlineManagementSystem {
 		return airlinedb.fetchDatabaseContent();
 	}
 	private void addAirlineToDatabase(Airline airline) {
-		airlinedb.storeToDatabase(airline);
+		try {
+			airlinedb.storeToDatabase(airline);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	public void removeAirlineFromDatabase(Airline airline) {

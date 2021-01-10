@@ -24,7 +24,7 @@
                         <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
                         <div class="navbarsections">
                             <div class="dropdown">
-                                <button class="dropbtn">Create</button>
+                                <button class="dropbtn">Create &#11206;</button>
                                 <div class="dropdown-content">
                                     <a href="AirlineForm.html">Airline</a>
                                     <a href="AirportForm.html">Airport</a>
@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="dropdown">
-                                <button class="dropbtn">List</button>
+                                <button class="dropbtn">List &#11206;</button>
                                 <div class="dropdown-content">
                                     <a href="AirlineList.jsp">Airline</a>
                                     <a href="AirportList.jsp">Airport</a>
@@ -43,7 +43,7 @@
 
 
                             <div class="dropdown">
-                                <button class="dropbtn">Modify</button>
+                                <button class="dropbtn">Modify &#11206;</button>
                                 <div class="dropdown-content">
                                     <a href="#">Airline</a> <a href="#">Airport</a> <a href="#">Flight</a>
                                 </div>

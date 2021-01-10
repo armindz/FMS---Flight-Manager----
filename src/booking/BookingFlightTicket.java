@@ -65,7 +65,7 @@ public class BookingFlightTicket {
 		return false;
 	}
 
-	public ArrayList<FlightTicket> getListOfFlights() {
+	public ArrayList<FlightTicket> getListOfFlightTickets() {
 
 		return fetchFlightTicketDatabaseContentToList();
 	}
@@ -87,19 +87,21 @@ public class BookingFlightTicket {
 		flightTicketdb.storeToDatabase(flightTicket);
 	}
 
-	public void removeFlightTicketFromDatabase(int flight_ID, char seatRow, int seatNumber) { // delete flight content
-																								// based on forwarded
-																								// flight ID and delete
-																								// seats related to
-																								// flight
-
+	public void removeFlightTicketFromDatabase(int flight_ID, char seatRow, int seatNumber) { // delete flight ticket and mark seat as available
+		
 		flightTicketdb.deleteContentFromDatabase(flight_ID, seatRow, seatNumber);
+		flightms.markSeatAsAvailable(flight_ID, seatRow, seatNumber);
 
 	}
+	
 
-	public void removeFLightTicketRelatedToSpecificFlight(int flight_ID) {
+	public void removeFLightTicketRelatedToSpecificFlight(int flight_ID) { // delete flight tickets, used when flight is being deleted
 
 		flightTicketdb.deleteAllContentFromDatabaseRelatedToSpecificFlight(flight_ID);
+		
 	}
 
+	public void updateFlightTicketData (int flight_ID, char seatRow, int seatNumber) {
+		
+	}
 }

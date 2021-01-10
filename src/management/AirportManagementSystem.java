@@ -1,5 +1,6 @@
 package management;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -105,8 +106,8 @@ public class AirportManagementSystem {
 		return airportdb.fetchDatabaseContent();
 	}
 	private void addAirportToDatabase(Airport airport) {
-
-		airportdb.storeToDatabase(airport);
+			airportdb.storeToDatabase(airport);
+		
 	}
 
 	

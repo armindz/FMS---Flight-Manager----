@@ -12,24 +12,22 @@ import models.FlightTicket;
 
 public class FlightTicketDatabase {
 
-	private static String statementToStoreDataIntoFlightTickets = "INSERT INTO flightTickets"
+	private static String statementToStoreDataIntoFlightTickets = "INSERT INTO flight_tickets"
 			+ "(flight_ID, AirlineCodename, Airport_Codename,destinationAirport, Flightclass, Date_of_flight, seatRow, seatNumber, flight_Price, buyers_Name) values "
 			+ " (?,?,?,?,?,?,?,?,?,?);";
-	private static String statementToDisplayDataOfFlightTickets = "SELECT * FROM flightsTickets";
-	private static String statementToUpdateFlightTicketsData = "UPDATE flightTickets set AirlineCodename= ?,Airport_Codename= ?, destinationAirport = ?, Flightclass = ?, "
+	private static String statementToDisplayDataOfFlightTickets = "SELECT * FROM flight_tickets";
+	private static String statementToUpdateFlightTicketsData = "UPDATE flight_tickets set AirlineCodename= ?,Airport_Codename= ?, destinationAirport = ?, Flightclass = ?, "
 			+ "Date_of_flight = ?, flight_Price= ?  where flight_ID= ?, seatRow = ?, seatNumber = ?,  buyers_Name = ?";
-	private static String statementToDeleteDataFromFlightTickets = "DELETE from flightTickets where flight_ID=? , seatRow = ? , seatNumber= ?";
-	private static String statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight = "DELETE from flightTickets where flight_ID=? ";
+	private static String statementToDeleteDataFromFlightTickets = "DELETE from flight_tickets where flight_ID=? , seatRow = ? , seatNumber= ?";
+	private static String statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight = "DELETE from flight_tickets where flight_ID=? ";
 	final String STATEMENT_IF_CODENAME_IS_NULL = "NOT AVAILABLE";
 	AirlineManagementSystem airlinems = new AirlineManagementSystem();
 	AirportManagementSystem airportms = new AirportManagementSystem();
 
-	public void storeToDatabase(FlightTicket flightTicket) throws SQLException {
-
-		Connection conn = DatabaseConnection.getConnection();
+	public void storeToDatabase(FlightTicket flightTicket) {
 
 		try {
-
+			Connection conn = DatabaseConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoFlightTickets);
 
 			preparedStmt.setInt(1, flightTicket.getFlightId()); // Flight_ID Column
@@ -56,17 +54,13 @@ public class FlightTicketDatabase {
 			e.printStackTrace();
 		}
 
-		finally {
-
-			if (conn != null)
-				conn.close();
-		}
 	}
 
 	public ArrayList<FlightTicket> fetchDatabaseContent() { // mechanism for fetching content from database and
 															// returning as ArrayList
 
 		ArrayList<FlightTicket> flightTickets = new ArrayList<>();
+
 		try {
 
 			Connection conn = DatabaseConnection.getConnection();
@@ -96,13 +90,14 @@ public class FlightTicketDatabase {
 					System.out.println(flightTickets);
 				}
 			}
+			conn.close();
 		}
 
 		catch (Exception e) {
 
-			System.out.println("Something went wrong");
 			e.printStackTrace();
 		}
+
 		return flightTickets;
 	}
 
@@ -111,6 +106,7 @@ public class FlightTicketDatabase {
 			double flight_Price, String buyers_Name) {
 
 		Timestamp timestamp = new Timestamp(Date_of_flight.getTimeInMillis());
+
 		try {
 
 			Connection conn = DatabaseConnection.getConnection();
@@ -136,6 +132,7 @@ public class FlightTicketDatabase {
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
+
 	}
 
 	public void deleteContentFromDatabase(int flight_ID, char seatRow, int seatNumber) { // deleting from database
@@ -160,6 +157,7 @@ public class FlightTicketDatabase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public void deleteAllContentFromDatabaseRelatedToSpecificFlight(int flight_ID) { // deleting from database content
@@ -169,7 +167,8 @@ public class FlightTicketDatabase {
 		try {
 
 			Connection conn = DatabaseConnection.getConnection();
-			PreparedStatement preparedStmt = conn.prepareStatement(statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight);
+			PreparedStatement preparedStmt = conn
+					.prepareStatement(statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight);
 
 			preparedStmt.setInt(1, flight_ID);
 			preparedStmt.executeUpdate();
@@ -181,5 +180,6 @@ public class FlightTicketDatabase {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 }
