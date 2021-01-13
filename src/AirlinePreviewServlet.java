@@ -42,8 +42,7 @@ public class AirlinePreviewServlet extends HttpServlet {
 		  try {
 		  
 		  for(int i=0; i < airlineDataList.size(); i++) {
-			  // convert flightID (int to string) in order to check if it is equal
-			//  if( flightID.equals(request.getParameter("flightID"))) {
+			 
 			  if( airlineDataList.get(i).getAirlineCodename().equals(request.getParameter("product_id"))) {
 				  
 				  Airline airline = new Airline( airlineDataList.get(i).getAirlineCodename(), 

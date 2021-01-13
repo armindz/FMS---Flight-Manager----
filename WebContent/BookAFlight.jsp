@@ -58,7 +58,7 @@
 					<a href="#">Airline</a> <a href="#">Airport</a> <a href="#">Flight</a>
 				</div>
 			</div>
-			<a id="navbarBook" href="">Book</a>
+			
 
 			<form class="logoutButton" action="LogoutServlet" method="GET">
 				<button class="logoutbtn">Log out!</button>

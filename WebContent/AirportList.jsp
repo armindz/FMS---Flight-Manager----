@@ -48,7 +48,7 @@
 					<a href="#">Airline</a> <a href="#">Airport</a> <a href="#">Flight</a>
 				</div>
 			</div>
-			<a id="navbarBook" href="BookAFlight.html">Book</a>
+			
 			<form class="logoutButton" action="LogoutServlet" method="GET">
 				<button class="logoutbtn">Log out!</button>
 			</form>
@@ -99,8 +99,8 @@
 						value="<%=fetchDataToList.get(i).getAirportCodename()%>" /> <input
 						type="submit" name="update" value="Update" />
 				</form>
-				<form id="viewAirport" action="ViewAirportServlet" method="GET"
-					name="vievAirportId">
+				<form id="viewAirport" action="AirportPreviewServlet" method="GET"
+					name="viewAirportId">
 					<input type="hidden" name="product_id"
 						value="<%=fetchDataToList.get(i).getAirportCodename()%>" /> <input
 						type="submit" name="view" value="View" />
