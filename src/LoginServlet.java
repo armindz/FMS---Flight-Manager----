@@ -11,35 +11,36 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public LoginServlet() {
-        super();
-        
-    }
 
+	public LoginServlet() {
+		super();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		UserManagementSystem userms = new UserManagementSystem();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
 		if (userms.isLoginValid(username, password)) {
-			
-			 HttpSession session=request.getSession();  
-		        session.setAttribute("username",username);  
-			//request.login(username, password);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("username", username);
+
+			// request.login(username, password);
 			response.sendRedirect("index.html");
 		}
-		
+
 		else {
 			response.sendRedirect("login.html");
 		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		doGet(request, response);
 	}
 

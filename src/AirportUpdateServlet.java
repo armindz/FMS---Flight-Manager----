@@ -1,9 +1,9 @@
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,36 +13,32 @@ import javax.servlet.http.HttpSession;
 
 import database.AirportDatabase;
 
-
 @WebServlet("/AirportUpdateServlet")
 public class AirportUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public AirportUpdateServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();  
+	public AirportUpdateServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		try {
-			if(session != null) {
-			updateAirport(request, response);
+			if (session != null) {
+				updateAirport(request, response);
 			}
-			
+
 			else {
-				PrintWriter out = response.getWriter();  
-				out.print("Not logged in!");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
 	private void updateAirport(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
@@ -52,14 +48,15 @@ public class AirportUpdateServlet extends HttpServlet {
 		String airportCity = request.getParameter("airportCity");
 		String airportCountry = request.getParameter("airportCountry");
 		AirportDatabase airportdb = new AirportDatabase();
-		
+
 		airportdb.updateDatabaseContent(airportCodename, airportFullname, airportType, airportCity, airportCountry);
 
-		response.sendRedirect("AirlineList.jsp");
+		response.sendRedirect("airlineList.jsp");
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 

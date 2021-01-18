@@ -1,6 +1,4 @@
 
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -11,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import management.FlightManagementSystem;
-
 
 @WebServlet("/FlightAddServlet")
 public class FlightAddServlet extends HttpServlet {
@@ -32,16 +30,17 @@ public class FlightAddServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
-		HttpSession session=request.getSession();  
+
+		HttpSession session = request.getSession(false);
 		try {
-			if(session != null) {
-			createFlight(request, response);
+			if (session != null) {
+				createFlight(request, response);
 			}
-			
+
 			else {
-				PrintWriter out = response.getWriter();  
-				out.print("Not logged in!");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
+
 			}
 		}
 
@@ -73,12 +72,12 @@ public class FlightAddServlet extends HttpServlet {
 		flightms.createFlight(airlineCodename, airportCodename, destinationAirportCodename, flightClass, dateOfFlight,
 				seatRow, seatNumber, flightPrice);
 
-		response.sendRedirect("FlightList.jsp");
+		response.sendRedirect("flightList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 

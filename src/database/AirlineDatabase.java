@@ -4,6 +4,8 @@ package database;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import models.Airline;
 
 public class AirlineDatabase {

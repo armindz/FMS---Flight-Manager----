@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import management.AirlineManagementSystem;
 
-/**
- * Servlet implementation class AirlineAddServlet
- */
 @WebServlet("/AirlineAddServlet")
 public class AirlineAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,16 +24,16 @@ public class AirlineAddServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session=request.getSession();  
+
+		HttpSession session = request.getSession(false);
 		try {
-			if(session != null) {
-			createAirline(request, response);
+			if (session != null) {
+				createAirline(request, response);
 			}
-			
+
 			else {
-				PrintWriter out = response.getWriter();  
-				out.print("Not logged in!");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
 			}
 		}
 
@@ -53,7 +51,7 @@ public class AirlineAddServlet extends HttpServlet {
 		AirlineManagementSystem airlinems = new AirlineManagementSystem();
 
 		airlinems.createAirline(airlineCodename, airlineCallsign, airlineCountry);
-		response.sendRedirect("AirlineList.jsp");
+		response.sendRedirect("airlineList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,6 +1,4 @@
 
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -8,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,30 +17,28 @@ import javax.servlet.http.HttpSession;
 import database.FlightDatabase;
 import management.FlightManagementSystem;
 
-
 @WebServlet("/FlightUpdateServlet")
 public class FlightUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	public FlightUpdateServlet() {
 		super();
-	
+
 	}
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session=request.getSession();  
+		HttpSession session = request.getSession(false);
 		try {
-			if(session != null) {
-			updateFlight(request, response);
+			if (session != null) {
+				updateFlight(request, response);
 			}
-			
+
 			else {
-				PrintWriter out = response.getWriter();  
-				out.print("Not logged in!");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
+
 			}
 		}
 
@@ -76,13 +73,12 @@ public class FlightUpdateServlet extends HttpServlet {
 		flightdb.updateDatabaseContent(flightId, airlineCodename, airportCodename, destinationAirportCodename,
 				flightClass, dateOfFlight, seatRow, seatNumber, flightPrice);
 
-		response.sendRedirect("FlightList.jsp");
+		response.sendRedirect("flightList.jsp");
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 

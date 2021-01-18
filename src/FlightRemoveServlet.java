@@ -1,11 +1,9 @@
 
-
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,15 +27,16 @@ public class FlightRemoveServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session=request.getSession();  
+		HttpSession session = request.getSession(false);
 		try {
-			if(session != null) {
-			removeFlight(request, response);
+			if (session != null) {
+				removeFlight(request, response);
 			}
-			
+
 			else {
-				PrintWriter out = response.getWriter();  
-				out.print("Not logged in!");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
+
 			}
 		} catch (SQLException | IOException | ParseException e) {
 			e.printStackTrace();
@@ -51,10 +50,9 @@ public class FlightRemoveServlet extends HttpServlet {
 		FlightManagementSystem flightms = new FlightManagementSystem();
 
 		int flightID = Integer.parseInt(request.getParameter("product_id"));
-		char seatRow = request.getParameter("seatRow").charAt(0);
-		int seatNumber = Integer.valueOf(request.getParameter("seatNumber"));
+
 		flightms.removeFlightFromDatabase(flightID);
-		response.sendRedirect("FlightList.jsp");
+		response.sendRedirect("flightList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

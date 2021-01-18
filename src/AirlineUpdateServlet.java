@@ -1,9 +1,9 @@
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import database.AirlineDatabase;
 
-/**
- * Servlet implementation class AirlineUpdateServlet
- */
 @WebServlet("/AirlineUpdateServlet")
 public class AirlineUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,15 +24,15 @@ public class AirlineUpdateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session=request.getSession();  
+		HttpSession session = request.getSession(false);
 		try {
-			if(session != null) {
-			updateAirline(request, response);
+			if (session != null) {
+				updateAirline(request, response);
 			}
-			
+
 			else {
-				PrintWriter out = response.getWriter();  
-				out.print("Not logged in!");
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
 			}
 		}
 
@@ -43,7 +40,7 @@ public class AirlineUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void updateAirline(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
@@ -53,8 +50,9 @@ public class AirlineUpdateServlet extends HttpServlet {
 		AirlineDatabase airlinedb = new AirlineDatabase();
 
 		airlinedb.updateDatabaseContent(airlineCodename, airlineCallsign, airlineCountry);
-		response.sendRedirect("AirlineList.jsp");
+		response.sendRedirect("airlineList.jsp");
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
