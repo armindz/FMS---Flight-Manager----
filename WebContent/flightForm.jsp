@@ -14,6 +14,7 @@
                             <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
                              <link rel="stylesheet" type="text/css" href="css/style.css">
                             <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
+                            <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
                         </head>
 
 
@@ -60,7 +61,7 @@
                             </header>
 
 
-
+  <h2 id="formHeading">Flight Creator</h2>
 
                             <form class="flightform" action="FlightAddServlet" method="GET">
                                 <img class="formavatar" src="img\icons\flightavatar.png">
