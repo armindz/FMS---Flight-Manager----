@@ -81,7 +81,14 @@
 				ArrayList<Airport> fetchDataToList = airportms.fetchDatabaseContentToList();
 				for (int i = 0; i < fetchDataToList.size(); i++) {
 			%>
-			<td><%=fetchDataToList.get(i).getAirportCodename()%></td>
+			<td> <form id="airportFromList" action="AirportPreviewServlet"
+										method="GET" name="airportFromList">
+										<input type="hidden" name="product_id"
+										value="<%=fetchDataToList.get(i).getAirportCodename()%>" />
+										<input type="submit" name="airline"
+										value="<%=fetchDataToList.get(i).getAirportCodename()%>" />
+									</form>
+			</td>
 			<td><%=fetchDataToList.get(i).getAirportFullname()%></td>
 			<td><%=fetchDataToList.get(i).getAirportType()%></td>
 			<td><%=fetchDataToList.get(i).getAirportCity()%></td>

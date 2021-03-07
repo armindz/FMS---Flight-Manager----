@@ -7,21 +7,23 @@ import models.Seat;
 public class SeatDatabase {
 
 	private static String statementToStoreDataIntoSeats = "INSERT INTO seats"
-			+ "(flight_ID, seatRow, seatNumber, isSeatAvailable) values " + " (?,?,?,?);";
+			+ "(seat_id, flight_id, seat_row, seat_number, is_seat_available) values " + " (?,?,?,?,?);";
 	private static String statementToDisplayDataOfSeats = "SELECT * FROM seats";
-	private static String statementToUpdateSeatsData = "UPDATE seats set isSeatAvailable= ? where flight_ID=? AND seatRow= ? AND seatNumber= ?";
-	private static String statementToDeleteDataFromSeats = "DELETE from seats where flight_ID=?";
+	private static String statementToUpdateSeatsData = "UPDATE seats set is_seat_available= ? where flight_id=? AND seat_row= ? AND seat_number= ?";
+	private static String statementToDeleteDataFromSeats = "DELETE from seats where flight_id=?";
 
 	public void storeToDatabase(Seat seat) {
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoSeats);
 
-			preparedStmt.setInt(1, seat.getFlightId()); // FlightID Column
-			preparedStmt.setString(2, String.valueOf(seat.getSeatRow())); // Seatrow Column
-			preparedStmt.setInt(3, seat.getSeatNumber()); // Seatnumber Column
-			preparedStmt.setBoolean(4, seat.isSeatAvailable()); // IsSeatAvailable Column
+			preparedStmt.setInt(1, generateSeatId());
+			preparedStmt.setInt(2, seat.getFlightId()); // FlightID Column
+			preparedStmt.setString(3, String.valueOf(seat.getSeatRow())); // Seatrow Column
+			preparedStmt.setInt(4, seat.getSeatNumber()); // Seatnumber Column
+			preparedStmt.setBoolean(5, seat.isSeatAvailable()); // IsSeatAvailable Column
 
 			preparedStmt.execute();
 
@@ -36,20 +38,49 @@ public class SeatDatabase {
 
 	}
 
+	public static int generateSeatId() { // mechanism for generating seat ID based on last stored ID in database
+
+		int seatID = 0;
+		try {
+
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfSeats);
+
+			while (rs.next()) {
+
+				if (rs.isLast()) {
+					seatID = rs.getInt(1);
+					seatID++;
+				}
+			}
+
+			return seatID;
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return seatID;
+	}
+
 	public ArrayList<Seat> fetchDatabaseContent() { // mechanism for fetching content from database and returning as
 													// ArrayList
 
 		ArrayList<Seat> seats = new ArrayList<>();
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfSeats);
 
 			while (rset.next()) {
 
-				Seat seat = new Seat(rset.getInt("flight_ID"), rset.getString("seatRow").charAt(0),
-						rset.getInt("seatNumber"), rset.getBoolean("isSeatAvailable"));
+				Seat seat = new Seat(rset.getInt("flight_id"), rset.getString("seat_row").charAt(0),
+						rset.getInt("seat_number"), rset.getBoolean("is_seat_available"));
 
 				seats.add(seat);
 			}
@@ -72,7 +103,8 @@ public class SeatDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateSeatsData);
 
 			preparedStmt.setBoolean(1, isSeatAvailable); // update isSeatAvailable column
@@ -96,7 +128,8 @@ public class SeatDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToDeleteDataFromSeats);
 
 			preparedStmt.setInt(1, flight_ID);

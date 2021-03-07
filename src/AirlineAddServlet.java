@@ -27,7 +27,7 @@ public class AirlineAddServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				createAirline(request, response);
 			}
 

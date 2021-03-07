@@ -196,10 +196,14 @@ String strDate= formatter.format(date);
 					
 					<% for(int i = 0; i < flightFromList.size(); i++) {
                 			if ( flightFromList.get(i).getFlight_id() == flight.getFlight_id()) {  %>
-								<option value=<%= flight.getFlight_id()%> selected><%= flight.getFlight_id()%></option>
+								<option value=<%= flight.getFlight_id()%> selected><%= flight.getFlight_id()%> 
+								<%=flight.getAirport().getAirportCodename()%> 
+								<%=flight.getDestinationAirport().getAirportCodename() %></option>
 							
                 			<% } else { %>
-								<option value=<%= flightFromList.get(i).getFlight_id()%>><%= flightFromList.get(i).getFlight_id()%></option>
+								<option value=<%= flightFromList.get(i).getFlight_id()%>><%= flightFromList.get(i).getFlight_id()%> 
+								<%= flightFromList.get(i).getAirport().getAirportCodename() %>
+								<%= flightFromList.get(i).getDestinationAirport().getAirportCodename() %></option>
 
 					<% 
                 		}

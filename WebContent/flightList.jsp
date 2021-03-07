@@ -64,8 +64,6 @@
 
                                 <table class="flightListTable" style="width:100%">
                                     <tr>
-
-                                        <th>Flight ID</th>
                                         <th>Airline</th>
                                         <th>Airport</th>
                                         <th>Destination Airport</th>
@@ -87,16 +85,7 @@
  						
  						{       %>
 
-                                          <td>
-						<form id="viewFlightID" action="BookAFlight" method="GET"
-							name="vievFlightId">
-							<input type="hidden" name="product_id"
-								value="<%=fetchDataToList.get(i).getFlight_id()%>" /> <input
-								type="submit" name="view"
-								value="<%=fetchDataToList.get(i).getFlight_id()%>" />
-						</form>
-
-					</td>
+                            
 					<td>
 						<form id="airlineFromList" action="AirlinePreviewServlet"
 							method="GET" name="airlineFromList">

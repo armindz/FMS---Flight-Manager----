@@ -13,12 +13,12 @@ import models.FlightTicket;
 public class FlightTicketDatabase {
 
 	private static String statementToStoreDataIntoFlightTickets = "INSERT INTO flight_tickets"
-			+ "(flight_ID, AirlineCodename, Airport_Codename,destinationAirport, Flightclass, Date_of_flight, seatRow, seatNumber, flight_Price, buyers_Name) values "
-			+ " (?,?,?,?,?,?,?,?,?,?);";
+			+ "(ticket_ID, flight_ID, airline_codename, airport_codename, destination_airport, flight_class, date_of_flight, seat_row, seat_number, flight_price, buyers_name) values "
+			+ " (?,?,?,?,?,?,?,?,?,?,?);";
 	private static String statementToDisplayDataOfFlightTickets = "SELECT * FROM flight_tickets";
-	private static String statementToUpdateFlightTicketsData = "UPDATE flight_tickets set AirlineCodename= ?,Airport_Codename= ?, destinationAirport = ?, Flightclass = ?, "
-			+ "Date_of_flight = ?, flight_Price= ?  where flight_ID= ?, seatRow = ?, seatNumber = ?,  buyers_Name = ?";
-	private static String statementToDeleteDataFromFlightTickets = "DELETE from flight_tickets where flight_ID=? , seatRow = ? , seatNumber= ?";
+	private static String statementToUpdateFlightTicketsData = "UPDATE flight_tickets set airline_codename= ?,airport_codename= ?, destination_airport = ?, flight_class = ?, "
+			+ "date_of_flight = ?, flight_price= ?  where flight_ID= ?, seat_row = ?, seat_number = ?,  buyers_name = ?";
+	private static String statementToDeleteDataFromFlightTickets = "DELETE from flight_tickets where flight_ID=? , seat_row = ? , seat_number= ?";
 	private static String statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight = "DELETE from flight_tickets where flight_ID=? ";
 	final String STATEMENT_IF_CODENAME_IS_NULL = "NOT AVAILABLE";
 	AirlineManagementSystem airlinems = new AirlineManagementSystem();
@@ -27,21 +27,21 @@ public class FlightTicketDatabase {
 	public void storeToDatabase(FlightTicket flightTicket) {
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoFlightTickets);
 
-			preparedStmt.setInt(1, flightTicket.getFlightId()); // Flight_ID Column
-			preparedStmt.setString(2, flightTicket.getAirline().getAirlineCodename()); // AirlineCodename Column
-			preparedStmt.setString(3, flightTicket.getAirport().getAirportCodename()); // AirportCodename Column
-			preparedStmt.setString(4, flightTicket.getDestinationAirport().getAirportCodename()); // Destination Airport
-			// Column
-			preparedStmt.setString(5, flightTicket.getFlightClass()); // Flight_Class Column
-			preparedStmt.setTimestamp(6, flightTicket.getDateOfFlightTicketInDateTime(flightTicket.getDateOfFlight())); // Date_OF_Flight
-			// Column
-			preparedStmt.setString(7, String.valueOf(flightTicket.getSeatRow())); // SeatRow Column
-			preparedStmt.setInt(8, flightTicket.getSeatNumber()); // Seat_Number Column
-			preparedStmt.setDouble(9, flightTicket.getFlightPrice()); // Flight_Price Column
-			preparedStmt.setString(10, flightTicket.getBuyersName());
+			preparedStmt.setInt(1, generateTicketId());
+			preparedStmt.setInt(2, flightTicket.getFlightId()); // Flight_ID Column
+			preparedStmt.setString(3, flightTicket.getAirline().getAirlineCodename()); // AirlineCodename Column
+			preparedStmt.setString(4, flightTicket.getAirport().getAirportCodename()); // AirportCodename Column
+			preparedStmt.setString(5, flightTicket.getDestinationAirport().getAirportCodename()); // Destination Airport
+			preparedStmt.setString(6, flightTicket.getFlightClass()); // Flight_Class Column
+			preparedStmt.setTimestamp(7, flightTicket.getDateOfFlightTicketInDateTime(flightTicket.getDateOfFlight())); // Date_OF_Flight
+			preparedStmt.setString(8, String.valueOf(flightTicket.getSeatRow())); // SeatRow Column
+			preparedStmt.setInt(9, flightTicket.getSeatNumber()); // Seat_Number Column
+			preparedStmt.setDouble(10, flightTicket.getFlightPrice()); // Flight_Price Column
+			preparedStmt.setString(11, flightTicket.getBuyersName());
 
 			preparedStmt.execute();
 
@@ -56,6 +56,34 @@ public class FlightTicketDatabase {
 
 	}
 
+	public static int generateTicketId() { // mechanism for generating seat ID based on last stored ID in database
+
+		int ticketID = 0;
+		try {
+
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfFlightTickets);
+
+			while (rs.next()) {
+
+				if (rs.isLast()) {
+					ticketID = rs.getInt(1);
+					ticketID++;
+				}
+			}
+
+			return ticketID;
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ticketID;
+	}
+
 	public ArrayList<FlightTicket> fetchDatabaseContent() { // mechanism for fetching content from database and
 															// returning as ArrayList
 
@@ -63,7 +91,8 @@ public class FlightTicketDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfFlightTickets);
 
@@ -71,20 +100,20 @@ public class FlightTicketDatabase {
 			while (rset.next()) {
 
 				Calendar cal = Calendar.getInstance();
-				Timestamp timestamp = rset.getTimestamp("Date_of_flight");
+				Timestamp timestamp = rset.getTimestamp("date_of_flight");
 				cal.setTime(timestamp);
 
 				// check if airline is not null (may be deleted)
-				if (airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")) != null
-						&& airportms.getAirportFromCodename(rset.getString("Airport_Codename")) != null
-						&& airportms.getAirportFromCodename(rset.getString("destinationAirport")) != null) {
+				if (airlinems.getAirlineFromCodename(rset.getString("airline_codename")) != null
+						&& airportms.getAirportFromCodename(rset.getString("airport_codename")) != null
+						&& airportms.getAirportFromCodename(rset.getString("destination_airport")) != null) {
 
 					FlightTicket flightTicket = new FlightTicket(rset.getInt("flight_ID"),
-							airlinems.getAirlineFromCodename(rset.getString("AirlineCodename")),
-							airportms.getAirportFromCodename(rset.getString("Airport_Codename")),
-							airportms.getAirportFromCodename(rset.getString("destinationAirport")),
-							rset.getString("flightclass"), cal, rset.getString("seatRow").charAt(0),
-							rset.getInt("seatNumber"), rset.getDouble("flight_Price"), rset.getString("buyers_Name"));
+							airlinems.getAirlineFromCodename(rset.getString("airline_codename")),
+							airportms.getAirportFromCodename(rset.getString("airport_codename")),
+							airportms.getAirportFromCodename(rset.getString("destination_airport")),
+							rset.getString("flight_class"), cal, rset.getString("seat_row").charAt(0),
+							rset.getInt("seat_number"), rset.getDouble("flight_price"), rset.getString("buyers_name"));
 
 					flightTickets.add(flightTicket);
 					System.out.println(flightTickets);
@@ -109,7 +138,8 @@ public class FlightTicketDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateFlightTicketsData);
 
 			preparedStmt.setString(1, AirlineCodename); // update Airline_Codename column
@@ -142,7 +172,8 @@ public class FlightTicketDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToDeleteDataFromFlightTickets);
 
 			preparedStmt.setInt(1, flight_ID);
@@ -166,7 +197,8 @@ public class FlightTicketDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn
 					.prepareStatement(statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight);
 

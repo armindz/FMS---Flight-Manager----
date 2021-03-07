@@ -11,26 +11,26 @@ import models.Airline;
 public class AirlineDatabase {
 
 	private static String statementToStoreDataIntoAirlines = "INSERT INTO airlines"
-			+ "(Airline_Codename, Airline_Callsign, Airline_Country) values " + " (?,?,?);";
+			+ "(airline_id, airline_codename, airline_callsign, airline_country) values " + " (?,?,?,?);";
 	private static String statementToDisplayDataOfAirlines = "SELECT * FROM airlines";
-	private static String statementToUpdateAirlinesData = "UPDATE airlines set Airline_Callsign= ?, Airline_Country = ? where  Airline_Codename= ? ";
-	private static String statementToDeleteDataFromAirlines = "DELETE from airlines where Airline_Codename=?";
+	private static String statementToUpdateAirlinesData = "UPDATE airlines set airline_callsign= ?, airline_country = ? where  airline_codename= ? ";
+	private static String statementToDeleteDataFromAirlines = "DELETE from airlines where airline_codename=?";
 
 	public void storeToDatabase(Airline airline) throws SQLException {
 
 		try {
-
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoAirlines);
-
-			preparedStmt.setString(1, airline.getAirlineCodename()); // Airline_Codename Column
-			preparedStmt.setString(2, airline.getAirlineCallsign()); // Airline_Callsign Column
-			preparedStmt.setString(3, airline.getAirlineCountry()); // Airline_Country Column
-
+			
+			preparedStmt.setInt(1, generateAirlineId()); // airline_id column;
+			preparedStmt.setString(2, airline.getAirlineCodename()); // airline_codename Column
+			preparedStmt.setString(3, airline.getAirlineCallsign()); // airline_callsign Column
+			preparedStmt.setString(4, airline.getAirlineCountry()); // airline_country Column
 			preparedStmt.execute();
 
 			conn.close();
-			preparedStmt.close();
+			//preparedStmt.close();
 		}
 
 		catch (Exception e) {
@@ -39,23 +39,52 @@ public class AirlineDatabase {
 
 	}
 
+	
+	public static int generateAirlineId() { // mechanism for generating airline ID based on last stored ID in database
+		
+		int airlineID = 0;
+		try {
+
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfAirlines);
+			
+
+			while (rs.next()) {
+
+				if (rs.isLast()) {
+					airlineID = rs.getInt(1);
+					airlineID++;
+				}
+			}
+			
+			return airlineID;
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return airlineID;
+	}
 	public ArrayList<Airline> fetchDatabaseContent() { // mechanism for fetching content from database and returning as
 														// ArrayList
 
 		ArrayList<Airline> airlines = new ArrayList<>();
 		try {
-
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfAirlines);
 			airlines.clear();
 			while (rset.next()) {
-				Airline airline = new Airline(rset.getString("Airline_Codename"), rset.getString("Airline_Callsign"),
-						rset.getString("Airline_Country"));
+				Airline airline = new Airline(rset.getString("airline_codename"), rset.getString("airline_callsign"),
+						rset.getString("airline_country"));
 
 				airlines.add(airline);
 			}
-			conn.close();
+			
 		}
 
 		catch (Exception e) {
@@ -69,7 +98,8 @@ public class AirlineDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateAirlinesData);
 
 			preparedStmt.setString(1, Airline_Callsign); // update Airline_Callsign column
@@ -88,7 +118,8 @@ public class AirlineDatabase {
 	public void deleteContentFromDatabase(String Airline_Codename) {
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToDeleteDataFromAirlines);
 			preparedStmt.setString(1, Airline_Codename);
 			preparedStmt.executeUpdate();

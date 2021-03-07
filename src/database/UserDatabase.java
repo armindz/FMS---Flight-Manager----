@@ -21,7 +21,8 @@ public class UserDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoUsers);
 
 			preparedStmt.setInt(1, generateUserID()); // UserID Column
@@ -46,7 +47,8 @@ public class UserDatabase {
 		ArrayList<User> users = new ArrayList<>();
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfUsers);
 			while (rset.next()) {
@@ -62,6 +64,7 @@ public class UserDatabase {
 
 			e.printStackTrace();
 		}
+		
 
 		return users;
 	}
@@ -69,7 +72,8 @@ public class UserDatabase {
 	public void updateDatabaseContent(String username, String password) {
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateUsersData);
 
 			preparedStmt.setString(1, username); //
@@ -88,7 +92,8 @@ public class UserDatabase {
 	public void deleteContentFromDatabase(int userID) {
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToDeleteDataFromUsers);
 			preparedStmt.setInt(1, userID);
 			preparedStmt.executeUpdate();
@@ -104,7 +109,8 @@ public class UserDatabase {
 									// database
 
 		try {
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfUsers);
 			int userID = 0;

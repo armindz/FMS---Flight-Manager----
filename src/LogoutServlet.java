@@ -23,10 +23,10 @@ public class LogoutServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
+		
 		request.getRequestDispatcher("login.html").include(request, response);
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.invalidate();
 		response.sendRedirect("login.html");
 

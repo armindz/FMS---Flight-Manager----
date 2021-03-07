@@ -7,24 +7,26 @@ import models.Airport;
 public class AirportDatabase {
 
 	private static String statementToStoreDataIntoAirports = "INSERT INTO airports"
-			+ "(Airport_Codename, Airport_Fullname, Airport_Type, Airport_City, Airport_Country) values "
-			+ " (?,?,?, ?, ?);";
+			+ "(airport_id, airport_codename, airport_fullname, airport_type, airport_city, airport_country) values "
+			+ " (?,?,?, ?,?, ?);";
 	private static String statementToDisplayDataOfAirports = "SELECT * FROM airports";
-	private static String statementToUpdateAirportsData = "UPDATE airports set Airport_Fullname = ?, Airport_Type = ?, Airport_City =?, Airport_Country where  Airport_Codename= ?";
-	private static String statementToDeleteDataFromAirports = "DELETE from airports where Airport_Codename= ?";
+	private static String statementToUpdateAirportsData = "UPDATE airports set airport_fullname = ?, airport_type = ?, airport_city =?, airport_country where  airport_codename= ?";
+	private static String statementToDeleteDataFromAirports = "DELETE from airports where airport_codename= ?";
 
 	public void storeToDatabase(Airport airport) {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToStoreDataIntoAirports);
 
-			preparedStmt.setString(1, airport.getAirportCodename()); // Airport_Codename Column
-			preparedStmt.setString(2, airport.getAirportFullname()); // Airport_Fullname Column
-			preparedStmt.setString(3, airport.getAirportType()); // Airport_Type Column
-			preparedStmt.setString(4, airport.getAirportCity()); // Airport_City Column
-			preparedStmt.setString(5, airport.getAirportCountry()); // Airport_Country Column
+			preparedStmt.setInt(1, generateAirportId()); // airport_id Column
+			preparedStmt.setString(2, airport.getAirportCodename()); // airport_codename Column
+			preparedStmt.setString(3, airport.getAirportFullname()); // airport_fullname Column
+			preparedStmt.setString(4, airport.getAirportType()); // airport_type Column
+			preparedStmt.setString(5, airport.getAirportCity()); // airport_city Column
+			preparedStmt.setString(6, airport.getAirportCountry()); // airport_country Column
 
 			preparedStmt.execute();
 
@@ -38,26 +40,54 @@ public class AirportDatabase {
 		}
 
 	}
+public static int generateAirportId() { // mechanism for generating airport ID based on last stored ID in database
+		
+		int airportID = 0;
+		try {
 
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfAirports);
+			
+
+			while (rs.next()) {
+
+				if (rs.isLast()) {
+					airportID = rs.getInt(1);
+					airportID++;
+				}
+			}
+			
+			return airportID;
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return airportID;
+	}
 	public ArrayList<Airport> fetchDatabaseContent() { // mechanism for fetching content from database and returning as
 														// ArrayList
 
 		ArrayList<Airport> airports = new ArrayList<>();
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfAirports);
 			airports.clear();
 			while (rset.next()) {
 
-				Airport airport = new Airport(rset.getString("Airport_Codename"), rset.getString("Airport_Fullname"),
-						rset.getString("Airport_Type"), rset.getString("Airport_City"),
-						rset.getString("Airport_Country"));
+				Airport airport = new Airport(rset.getString("airport_codename"), rset.getString("airport_fullname"),
+						rset.getString("airport_type"), rset.getString("airport_city"),
+						rset.getString("airport_country"));
 
 				airports.add(airport);
 			}
-			conn.close();
+			
 		}
 
 		catch (Exception e) {
@@ -74,15 +104,15 @@ public class AirportDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToUpdateAirportsData);
 
-			preparedStmt.setString(2, Airport_Codename); // update Airport_Codename column
-			preparedStmt.setString(3, Airport_Fullname); // update Airport_Fullname column
-			preparedStmt.setString(4, Airport_Type); // update Airport_Type column
-			preparedStmt.setString(5, Airport_City); // update Airport_City column
-			preparedStmt.setString(6, Airport_Country); // update Airport_Country
-
+			preparedStmt.setString(2, Airport_Fullname); // update Airport_Fullname column
+			preparedStmt.setString(3, Airport_Type); // update Airport_Type column
+			preparedStmt.setString(4, Airport_City); // update Airport_City column
+			preparedStmt.setString(5, Airport_Country); // update Airport_Country
+			preparedStmt.setString(6, Airport_Codename); // update Airport_Codename column
 			preparedStmt.executeUpdate();
 
 			conn.close();
@@ -99,7 +129,8 @@ public class AirportDatabase {
 
 		try {
 
-			Connection conn = DatabaseConnection.getConnection();
+			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+			Connection conn = dbConnection.getConnection();
 			PreparedStatement preparedStmt = conn.prepareStatement(statementToDeleteDataFromAirports);
 
 			preparedStmt.setString(1, Airport_Codename);
