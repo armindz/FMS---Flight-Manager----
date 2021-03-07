@@ -38,18 +38,18 @@
 			<div class="dropdown">
 				<button class="dropbtn">Create &#11206;</button>
 				<div class="dropdown-content">
-					<a href="airlineForm.html">Airline</a> 
-					<a href="airportForm.html">Airport</a>
-					<a href="flightForm.jsp">Flight</a>
+					<a href="form/airlineForm.html">Airline</a> 
+					<a href="form/airportForm.html">Airport</a>
+					<a href="form/flightForm.jsp">Flight</a>
 				</div>
 			</div>
 
 			<div class="dropdown">
 				<button class="dropbtn">List &#11206;</button>
 				<div class="dropdown-content">
-					<a href="airlineList.jsp">Airline</a> 
-					<a href="airportList.jsp">Airport</a>
-					<a href="flightList.jsp">Flight</a>
+					<a href="list/airlineList.jsp">Airline</a> 
+					<a href="list/airportList.jsp">Airport</a>
+					<a href="list/flightList.jsp">Flight</a>
 				</div>
 			</div>
 
@@ -216,7 +216,7 @@ String strDate= formatter.format(date);
 				<br> <label for="seatRow">SEAT ROW:</label><br> <input
 					type="text" name="seatRow" /> <br />
 				<br /> <label for="seatNumber">SEAT NUMBER:</label><br> <input
-					type="text" name="seatNumber" /> <br />
+					type="number" name="seatNumber" /> <br />
 				<br /> <input class="buttonform" type="submit" value="Create" />
 
 			</form>
@@ -320,7 +320,7 @@ String strDate= formatter.format(date);
  							
  						try{
  						ArrayList <FlightTicket> fetchDataToList =  bft.fetchFlightTicketDatabaseContentToList();  
- 						for (int i=0; i <fetchDataToList.size(); i++) 
+ 						for (int i=0; i <=fetchDataToList.size(); i++) 
  						
  						{   if(fetchDataToList.get(i).getFlightId() == flight.getFlight_id()) {     %>
 

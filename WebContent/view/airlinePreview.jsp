@@ -27,42 +27,43 @@
 
 
 
-	<header>
+	  <header>
 
-		<a href="index.html"> <img id="logo"
-			src="img/icons/fms transparent.png"></a>
-		<div class="navbarsections">
-			<div class="dropdown">
-				<button class="dropbtn">Create &#11206;</button>
-				<div class="dropdown-content">
-					<a href="airlineForm.html">Airline</a> 
-					<a href="airportForm.html">Airport</a>
-					<a href="flightForm.html">Flight</a>
-				</div>
-			</div>
+        <a href="../index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
+        <div class="navbarsections">
+            <div class="dropdown">
+                <button class="dropbtn">Create &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="form/airlineForm.html">Airline</a>
+                    <a href="form/airportForm.html">Airport</a>
+                    <a href="form/flightForm.jsp">Flight</a>
+                </div>
+            </div>
 
-			<div class="dropdown">
-				<button class="dropbtn">List &#11206;</button>
-				<div class="dropdown-content">
-					<a href="airlineList.jsp">Airline</a> 
-					<a href="airportList.jsp">Airport</a>
-					<a href="flightList.jsp">Flight</a>
-				</div>
-			</div>
+            <div class="dropdown">
+                <button class="dropbtn">List &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="list/airlineList.jsp">Airline</a>
+                    <a href="list/airportList.jsp">Airport</a>
+                    <a href="list/flightList.jsp">Flight</a>
+                </div>
+            </div>
 
 
-			<div class="dropdown">
-				<button class="dropbtn">Modify &#11206;</button>
-				<div class="dropdown-content">
-					<a href="#">Airline</a> <a href="#">Airport</a> <a href="#">Flight</a>
-				</div>
-			</div>
+            <div class="dropdown">
+                <button class="dropbtn">Modify &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="#">Airline</a>
+                    <a href="#">Airport</a>
+                    <a href="#">Flight</a>
+                </div>
+            </div>
 
-			<form class="logoutButton" action="LogoutServlet" method="GET">
-				<button class="logoutbtn">Log out!</button>
-			</form>
-		</div>
-	</header>
+            <form class="logoutButton" action="LogoutServlet" method="GET">
+                <button class="logoutbtn">Log out!</button>
+            </form>
+        </div>
+    </header>
 	<%
 	Airline airline = (Airline) request.getAttribute("airlineData");
 	%>
@@ -90,8 +91,6 @@
 
 			<table class="flightListTable" style="width: 100%">
 				<tr>
-
-					<th>Flight ID</th>
 					<th>Airline</th>
 					<th>Airport</th>
 					<th>Destination Airport</th>
@@ -114,16 +113,7 @@
 							if (fetchDataToList.get(i).getAirline().getAirlineCodename().equals(airline.getAirlineCodename())) {
 					%>
 
-					<td>
-						<form id="viewFlightID" action="BookAFlight" method="GET"
-							name="vievFlightId">
-							<input type="hidden" name="product_id"
-								value="<%=fetchDataToList.get(i).getFlight_id()%>" /> <input
-								type="submit" name="view"
-								value="<%=fetchDataToList.get(i).getFlight_id()%>" />
-						</form>
-
-					</td>
+				
 					<td>
 						<form id="airlineFromList" action="AirlinePreviewServlet"
 							method="GET" name="airlineFromList">

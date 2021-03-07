@@ -25,13 +25,13 @@ public class AirportPreviewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	//	HttpSession session = request.getSession(false);
-	//	if (session != null) {
+		HttpSession session = request.getSession(false);
+		if (true) {
 			airportData(request, response);
-	//	} else {
+		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("login.html");
 			rd.forward(request, response);
-		// }
+		 }
 
 	}
 
@@ -51,7 +51,7 @@ public class AirportPreviewServlet extends HttpServlet {
 							airportDataList.get(i).getAirportCity(), airportDataList.get(i).getAirportCountry());
 					request.setAttribute("airportData", airport);
 
-					RequestDispatcher rd = request.getRequestDispatcher("airportPreview.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("view/airportPreview.jsp");
 					rd.forward(request, response);
 
 				}

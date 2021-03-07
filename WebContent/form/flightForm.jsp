@@ -11,8 +11,8 @@
                         <head>
                             <meta charset="ISO-8859-1">
                             <title>FMS - Create Flight</title>
-                            <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
-                             <link rel="stylesheet" type="text/css" href="css/style.css">
+                            <link rel="icon" href="../img/icons/fmsround.png" type="image/x-icon">
+                             <link rel="stylesheet" type="text/css" href="../css/style.css">
                             <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
                             <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
                         </head>
@@ -22,49 +22,49 @@
                            
 
 
-                            <header>
+                             <header>
 
-                                <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
-                                <div class="navbarsections">
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Create &#11206;</button>
-                                        <div class="dropdown-content">
-                                            <a href="airlineForm.html">Airline</a>
-                                            <a href="airportForm.html">Airport</a>
-                                            <a href="flightForm.jsp">Flight</a>
-                                        </div>
-                                    </div>
+        <a href="../index.html"> <img id="logo" src="../img/icons/fms transparent.png"></a>
+        <div class="navbarsections">
+            <div class="dropdown">
+                <button class="dropbtn">Create &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="airlineForm.html">Airline</a>
+                    <a href="airportForm.html">Airport</a>
+                    <a href="flightForm.jsp">Flight</a>
+                </div>
+            </div>
 
-                                    <div class="dropdown">
-                                        <button class="dropbtn">List &#11206;</button>
-                                        <div class="dropdown-content">
-                                            <a href="airlineList.jsp">Airline</a>
-                                            <a href="airportList.jsp">Airport</a>
-                                            <a href="flightList.jsp">Flight</a>
-                                        </div>
-                                    </div>
+            <div class="dropdown">
+                <button class="dropbtn">List &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="../list/airlineList.jsp">Airline</a>
+                    <a href="../list/airportList.jsp">Airport</a>
+                    <a href="../list/flightList.jsp">Flight</a>
+                </div>
+            </div>
 
 
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Modify</button>
-                                        <div class="dropdown-content">
-                                            <a href="#">Airline</a>
-                                            <a href="#">Airport</a>
-                                            <a href="#">Flight</a>
-                                        </div>
-                                    </div>
-                                   
-                                    <form class="logoutButton" action="LogoutServlet" method="GET">
-                                        <button class="logoutbtn">Log out!</button>
-                                    </form>
-                                </div>
-                            </header>
+            <div class="dropdown">
+                <button class="dropbtn">Modify &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="#">Airline</a>
+                    <a href="#">Airport</a>
+                    <a href="#">Flight</a>
+                </div>
+            </div>
+
+            <form class="logoutButton" action="../LogoutServlet" method="GET">
+                <button class="logoutbtn">Log out!</button>
+            </form>
+        </div>
+    </header>
 
 
   <h2 id="formHeading">Flight Creator</h2>
 
-                            <form class="flightform" action="FlightAddServlet" method="GET">
-                                <img class="formavatar" src="img\icons\flightavatar.png">
+                            <form class="flightform" action="../FlightAddServlet" method="GET">
+                                <img class="formavatar" src="..\img\icons\flightavatar.png">
 								<div class="table1">
                                 <label for="airlineCodename">Airline Codename: </label><br>
                                 <select name="airlineCodename" id="airlineCodenameSelect">
@@ -118,10 +118,10 @@
  			 </select> <br/><br/>
 
                                 <label for="seatNumber">Seats per row:</label><br>
-                                <input type="text" name="seatNumber" /> <br/><br/>
+                                <input type="number" name="seatNumber" /> <br/><br/>
 
                                 <label for="flightPrice">Flight price:</label><br>
-                                <input type="text" name="flightPrice" /> <br/><br/>
+                                <input type="number" step="any" name="flightPrice" /> <br/><br/>
 </div>
                                 <input class="buttonform" type="submit" value="Create" />
 

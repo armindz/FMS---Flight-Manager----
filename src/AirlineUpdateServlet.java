@@ -26,7 +26,7 @@ public class AirlineUpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				updateAirline(request, response);
 			}
 
@@ -50,7 +50,7 @@ public class AirlineUpdateServlet extends HttpServlet {
 		AirlineDatabase airlinedb = new AirlineDatabase();
 
 		airlinedb.updateDatabaseContent(airlineCodename, airlineCallsign, airlineCountry);
-		response.sendRedirect("airlineList.jsp");
+		response.sendRedirect("list/airlineList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

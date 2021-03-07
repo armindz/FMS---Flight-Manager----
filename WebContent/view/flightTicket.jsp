@@ -9,13 +9,13 @@
 <head>
 <meta charset="ISO-8859-2">
 <title>Flight Ticket - FMS</title>
-<link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
+<link rel="icon" href="../vimg/icons/fmsround.png" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='https://fonts.googleapis.com/css?family=Bubbler One '
 	rel='stylesheet '>
 </head>
 <body style="background-image:none">
-	<div class="ticketPreview">
+	<div class="ticketPreview" onclick="window.print()">
 
 		<%
 		FlightTicket flightTicket = (FlightTicket) request.getAttribute("flightTicketData");

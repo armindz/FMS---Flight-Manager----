@@ -26,7 +26,7 @@ public class AirportUpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				updateAirport(request, response);
 			}
 
@@ -51,7 +51,7 @@ public class AirportUpdateServlet extends HttpServlet {
 
 		airportdb.updateDatabaseContent(airportCodename, airportFullname, airportType, airportCity, airportCountry);
 
-		response.sendRedirect("airlineList.jsp");
+		response.sendRedirect("list/airlineList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

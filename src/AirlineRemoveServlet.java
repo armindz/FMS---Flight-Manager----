@@ -27,7 +27,7 @@ public class AirlineRemoveServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				removeAirline(request, response);
 			}
 
@@ -48,7 +48,7 @@ public class AirlineRemoveServlet extends HttpServlet {
 		AirlineManagementSystem airlinems = new AirlineManagementSystem();
 
 		airlinems.removeAirlineFromDatabase(airlinems.getAirlineFromCodename(airlineCodename));
-		response.sendRedirect("airlineList.jsp");
+		response.sendRedirect("list/airlineList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

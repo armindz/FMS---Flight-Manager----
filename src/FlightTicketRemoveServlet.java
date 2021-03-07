@@ -25,7 +25,7 @@ public class FlightTicketRemoveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if (true) {
 			removeFlightTicket(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("login.html");
@@ -51,7 +51,7 @@ public class FlightTicketRemoveServlet extends HttpServlet {
 						&& flightTicketDataToList.get(i).getSeatNumber() == seatNumber) {
 
 					bft.removeFlightTicketFromDatabase(flightID, seatRow, seatNumber);
-					response.sendRedirect("flightList.jsp");
+					response.sendRedirect("list/flightList.jsp");
 				}
 			}
 		} catch (Exception e) {

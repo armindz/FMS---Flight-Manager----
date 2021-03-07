@@ -3,7 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -11,11 +10,11 @@ import models.User;
 
 public class UserDatabase {
 
-	private static String statementToStoreDataIntoUsers = "INSERT INTO users" + "(UserID, Username, Password) values "
+	private static String statementToStoreDataIntoUsers = "INSERT INTO users" + "(user_ID, username, password) values "
 			+ " (?,?,?);";
 	private static String statementToDisplayDataOfUsers = "SELECT * FROM users";
-	private static String statementToUpdateUsersData = "UPDATE users set Password= ? where  Username= ? ";
-	private static String statementToDeleteDataFromUsers = "DELETE from users where UserID";
+	private static String statementToUpdateUsersData = "UPDATE users set password=? where  username=? ";
+	private static String statementToDeleteDataFromUsers = "DELETE from users where user_ID";
 
 	public void storeToDatabase(User user) {
 
@@ -52,7 +51,7 @@ public class UserDatabase {
 			Statement stmt = conn.createStatement();
 			ResultSet rset = stmt.executeQuery(statementToDisplayDataOfUsers);
 			while (rset.next()) {
-				User user = new User(rset.getInt("UserID"), rset.getString("Username"), rset.getString("Password"));
+				User user = new User(rset.getInt("user_ID"), rset.getString("username"), rset.getString("password"));
 
 				users.add(user);
 			}
@@ -107,13 +106,13 @@ public class UserDatabase {
 
 	public int generateUserID() { // mechanism for generating userID based on last stored ID in
 									// database
-
+		int userID = 0;
 		try {
 			DatabaseConnection dbConnection = DatabaseConnection.getInstance();
 			Connection conn = dbConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(statementToDisplayDataOfUsers);
-			int userID = 0;
+			
 
 			while (rs.next()) {
 
@@ -122,7 +121,6 @@ public class UserDatabase {
 					userID++;
 				}
 			}
-			conn.close();
 			return userID;
 		}
 

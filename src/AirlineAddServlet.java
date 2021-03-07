@@ -51,7 +51,7 @@ public class AirlineAddServlet extends HttpServlet {
 		AirlineManagementSystem airlinems = new AirlineManagementSystem();
 
 		airlinems.createAirline(airlineCodename, airlineCallsign, airlineCountry);
-		response.sendRedirect("airlineList.jsp");
+		response.sendRedirect("list/airlineList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

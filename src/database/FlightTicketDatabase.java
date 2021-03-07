@@ -16,9 +16,9 @@ public class FlightTicketDatabase {
 			+ "(ticket_ID, flight_ID, airline_codename, airport_codename, destination_airport, flight_class, date_of_flight, seat_row, seat_number, flight_price, buyers_name) values "
 			+ " (?,?,?,?,?,?,?,?,?,?,?);";
 	private static String statementToDisplayDataOfFlightTickets = "SELECT * FROM flight_tickets";
-	private static String statementToUpdateFlightTicketsData = "UPDATE flight_tickets set airline_codename= ?,airport_codename= ?, destination_airport = ?, flight_class = ?, "
-			+ "date_of_flight = ?, flight_price= ?  where flight_ID= ?, seat_row = ?, seat_number = ?,  buyers_name = ?";
-	private static String statementToDeleteDataFromFlightTickets = "DELETE from flight_tickets where flight_ID=? , seat_row = ? , seat_number= ?";
+	private static String statementToUpdateFlightTicketsData = "UPDATE flight_tickets set airline_codename=?,airport_codename=?, destination_airport=?, flight_class =?, "
+			+ "date_of_flight =?, flight_price=?  where flight_ID=?, seat_row =?, seat_number =?,  buyers_name =?";
+	private static String statementToDeleteDataFromFlightTickets = "DELETE from flight_tickets where flight_ID=? AND seat_row=? AND seat_number=?";
 	private static String statementToDeleteAllDataFromFlightTicketsRelatedToSpecificFlight = "DELETE from flight_tickets where flight_ID=? ";
 	final String STATEMENT_IF_CODENAME_IS_NULL = "NOT AVAILABLE";
 	AirlineManagementSystem airlinems = new AirlineManagementSystem();

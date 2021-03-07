@@ -29,7 +29,7 @@ public class FlightRemoveServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				removeFlight(request, response);
 			}
 
@@ -52,7 +52,7 @@ public class FlightRemoveServlet extends HttpServlet {
 		int flightID = Integer.parseInt(request.getParameter("product_id"));
 
 		flightms.removeFlightFromDatabase(flightID);
-		response.sendRedirect("flightList.jsp");
+		response.sendRedirect("list/flightList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

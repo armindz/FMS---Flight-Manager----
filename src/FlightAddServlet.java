@@ -1,8 +1,6 @@
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
-import java.util.Enumeration;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,7 +31,7 @@ public class FlightAddServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				createFlight(request, response);
 			}
 
@@ -72,7 +70,7 @@ public class FlightAddServlet extends HttpServlet {
 		flightms.createFlight(airlineCodename, airportCodename, destinationAirportCodename, flightClass, dateOfFlight,
 				seatRow, seatNumber, flightPrice);
 
-		response.sendRedirect("flightList.jsp");
+		response.sendRedirect("list/flightList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

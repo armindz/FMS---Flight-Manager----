@@ -3,19 +3,19 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>FMS - Create Airline</title>
-    <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
+    <link rel="icon" href="../img/icons/fmsround.png" type="image/x-icon">
 </head>
 
 
 <body>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 
 
-    <header>
+      <header>
 
-        <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
+        <a href="../index.html"> <img id="logo" src="../img/icons/fms transparent.png"></a>
         <div class="navbarsections">
             <div class="dropdown">
                 <button class="dropbtn">Create &#11206;</button>
@@ -29,9 +29,9 @@
             <div class="dropdown">
                 <button class="dropbtn">List &#11206;</button>
                 <div class="dropdown-content">
-                    <a href="airlineList.jsp">Airline</a>
-                    <a href="airportList.jsp">Airport</a>
-                    <a href="flightList.jsp">Flight</a>
+                    <a href="../list/airlineList.jsp">Airline</a>
+                    <a href="../list/airportList.jsp">Airport</a>
+                    <a href="../list/flightList.jsp">Flight</a>
                 </div>
             </div>
 
@@ -45,16 +45,15 @@
                 </div>
             </div>
 
-
-            <form class="logoutButton" action="LogoutServlet" method="GET">
+            <form class="logoutButton" action="../LogoutServlet" method="GET">
                 <button class="logoutbtn">Log out!</button>
             </form>
         </div>
     </header>
 
     <h2 id="formHeading">Airline Creator</h2>
-    <form class="airlineform" action="AirlineAddServlet" method="GET">
-        <img class="formavatar" src="img\icons\airlineavatar.jpg">
+    <form class="airlineform" action="../AirlineAddServlet" method="GET">
+        <img class="formavatar" src="..\img\icons\airlineavatar.jpg">
         <label for="airlineCodename">Codename:</label><br>
         <input type="text" name="airlineCodename" /><br/><br>
 

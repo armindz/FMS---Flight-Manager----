@@ -9,8 +9,8 @@
                 <head>
                     <meta charset="ISO-8859-1">
                     <title>FMS - Airline List</title>
-                    <link rel="icon" href="img/icons/fmsround.png" type="image/x-icon">
-                     <link rel="stylesheet" type="text/css" href="css/style.css">
+                    <link rel="icon" href="../img/icons/fmsround.png" type="image/x-icon">
+                     <link rel="stylesheet" type="text/css" href="../css/style.css">
                     <link href='https://fonts.googleapis.com/css?family=Bubbler One ' rel='stylesheet '>
                 </head>
 
@@ -19,41 +19,43 @@
                    
 
 
-                    <header>
+                     <header>
 
-                        <a href="index.html"> <img id="logo" src="img/icons/fms transparent.png"></a>
-                        <div class="navbarsections">
-                            <div class="dropdown">
-                                <button class="dropbtn">Create &#11206;</button>
-                                <div class="dropdown-content">
-                                    <a href="airlineForm.html">Airline</a>
-                                    <a href="airportForm.html">Airport</a>
-                                    <a href="flightForm.jsp">Flight</a>
-                                </div>
-                            </div>
+         <a href="../index.html"> <img id="logo" src="../img/icons/fms transparent.png"></a>
+        <div class="navbarsections">
+            <div class="dropdown">
+                <button class="dropbtn">Create &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="../form/airlineForm.html">Airline</a>
+                    <a href="../form/airportForm.html">Airport</a>
+                    <a href="../form/flightForm.jsp">Flight</a>
+                </div>
+            </div>
 
-                            <div class="dropdown">
-                                <button class="dropbtn">List &#11206;</button>
-                                <div class="dropdown-content">
-                                    <a href="airlineList.jsp">Airline</a>
-                                    <a href="airportList.jsp">Airport</a>
-                                    <a href="flightList.jsp">Flight</a>
-                                </div>
-                            </div>
+            <div class="dropdown">
+                <button class="dropbtn">List &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="airlineList.jsp">Airline</a>
+                    <a href="airportList.jsp">Airport</a>
+                    <a href="flightList.jsp">Flight</a>
+                </div>
+            </div>
 
 
-                            <div class="dropdown">
-                                <button class="dropbtn">Modify &#11206;</button>
-                                <div class="dropdown-content">
-                                    <a href="#">Airline</a> <a href="#">Airport</a> <a href="#">Flight</a>
-                                </div>
-                            </div>
-                          
- 										<form class="logoutButton" action="LogoutServlet" method="GET">
-                                        <button class="logoutbtn">Log out!</button>
-                                    </form>
-                        </div>
-                    </header>
+            <div class="dropdown">
+                <button class="dropbtn">Modify &#11206;</button>
+                <div class="dropdown-content">
+                    <a href="#">Airline</a>
+                    <a href="#">Airport</a>
+                    <a href="#">Flight</a>
+                </div>
+            </div>
+
+            <form class="logoutButton" action="../LogoutServlet" method="GET">
+                <button class="logoutbtn">Log out!</button>
+            </form>
+        </div>
+    </header>
 
 
 
@@ -77,7 +79,7 @@
 			for (int i = 0; i < fetchDataToList.size(); i++) {
 			%>
 									<td>
-                                   <form id="airlineFromList" action="AirlinePreviewServlet"
+                                   <form id="airlineFromList" action="../AirlinePreviewServlet"
 										method="GET" name="airlineFromList">
 										<input type="hidden" name="product_id"
 										value="<%=fetchDataToList.get(i).getAirlineCodename()%>" />
@@ -93,15 +95,15 @@
                                     </td>
                                     <td>
                                     <div class="tablefunctions">
-                                        <form id="remove" action="AirlineRemoveServlet" method="GET" name="removeid">
+                                        <form id="remove" action="../AirlineRemoveServlet" method="GET" name="removeid">
                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
                                             <input type="submit" name="remove" value="Remove" />
                                         </form>
-                                        <form id="update" action="AirlineUpdateServlet" method="GET" name="updateid">
+                                        <form id="update" action="../AirlineUpdateServlet" method="GET" name="updateid">
                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
                                             <input type="submit" name="update" value="Update" />
                                         </form>
-                                        <form id="viewAirline" action="AirlinePreviewServlet" method="GET" name="vievAirlineId">
+                                        <form id="viewAirline" action="../AirlinePreviewServlet" method="GET" name="vievAirlineId">
                                             <input type="hidden" name="product_id" value="<%=fetchDataToList.get(i).getAirlineCodename()%>" /> 
                                             <input type="submit" name="view" value="View" />
 

@@ -31,7 +31,7 @@ public class FlightUpdateServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				updateFlight(request, response);
 			}
 
@@ -73,7 +73,7 @@ public class FlightUpdateServlet extends HttpServlet {
 		flightdb.updateDatabaseContent(flightId, airlineCodename, airportCodename, destinationAirportCodename,
 				flightClass, dateOfFlight, seatRow, seatNumber, flightPrice);
 
-		response.sendRedirect("flightList.jsp");
+		response.sendRedirect("list/flightList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

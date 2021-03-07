@@ -3,6 +3,7 @@ import models.Flight;
 import models.FlightTicket;
 import booking.BookingFlightTicket;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -27,7 +28,7 @@ public class BookingFlightTicketServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		try {
 
-			if (session != null) {
+			if (true) {
 
 				bookAFlight(request, response);
 				requestDispatcher(request, response);
@@ -66,6 +67,7 @@ public class BookingFlightTicketServlet extends HttpServlet {
 	protected void requestDispatcher(HttpServletRequest request, HttpServletResponse response) {
 
 		FlightManagementSystem flightms = new FlightManagementSystem();
+		BookingFlightTicket bft = new BookingFlightTicket();
 		ArrayList<Flight> flightDataList = flightms.fetchFlightDatabaseContentToList();
 		int flightID = Integer.parseInt(request.getParameter("flightID"));
 		char seatRow = request.getParameter("seatRow").charAt(0);
@@ -80,7 +82,8 @@ public class BookingFlightTicketServlet extends HttpServlet {
 																								// to check if it is
 																								// equal
 
-				if (flightIdFromList.equals(request.getParameter("flightID"))) {
+				// prevent user to book the same ticket twice by validating seat availability
+				if (flightIdFromList.equals(request.getParameter("flightID")) && bft.isSeatAvailable(flightID, seatRow, seatNumber)) {
 
 					FlightTicket flightTicket = new FlightTicket(flightID, flightDataList.get(i).getAirline(),
 							flightDataList.get(i).getAirport(), flightDataList.get(i).getDestinationAirport(),
@@ -88,9 +91,22 @@ public class BookingFlightTicketServlet extends HttpServlet {
 							seatNumber, flightDataList.get(i).getFlightPrice(), buyersName);
 					request.setAttribute("flightTicketData", flightTicket);
 
-					RequestDispatcher rd = request.getRequestDispatcher("flightTicket.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("view/flightTicket.jsp");
 					rd.forward(request, response);
 				}
+				
+				// if user is found and seat is not available notify user about that
+				else if (flightIdFromList.equals(request.getParameter("flightID")) && !bft.isSeatAvailable(flightID, seatRow, seatNumber)){
+					 response.setContentType("text/html");  
+					 PrintWriter out = response.getWriter();  
+					 out.println("<html>");
+					 out.println("<body>");
+					 out.println("<p>Operation couldn't be completed. Seat may be reserved!</p>");
+					 out.println("</body>");
+					 out.println("</html>");
+				}
+				
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

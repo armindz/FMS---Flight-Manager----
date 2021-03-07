@@ -26,7 +26,7 @@ public class AirportRemoveServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				removeAirport(request, response);
 			}
 
@@ -48,7 +48,7 @@ public class AirportRemoveServlet extends HttpServlet {
 		AirportManagementSystem airportms = new AirportManagementSystem();
 
 		airportms.removeAirportFromDatabase(airportms.getAirportFromCodename(airportCodename));
-		response.sendRedirect("airportList.jsp");
+		response.sendRedirect("list/airportList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

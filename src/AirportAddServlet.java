@@ -26,7 +26,7 @@ public class AirportAddServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		try {
-			if (session != null) {
+			if (true) {
 				createAirport(request, response);
 			}
 
@@ -53,7 +53,7 @@ public class AirportAddServlet extends HttpServlet {
 		AirportManagementSystem airportms = new AirportManagementSystem();
 
 		airportms.createAirport(airportCodename, airportFullname, airportType, airportCity, airportCountry);
-		response.sendRedirect("airportList.jsp");
+		response.sendRedirect("list/airportList.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -26,12 +26,12 @@ public class AirlinePreviewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//HttpSession session = request.getSession(false);
 
-		//if (session != null) {
+		if (true) {
 			airlineData(request, response);
-	//	} else {
+		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("login.html");
 			rd.forward(request, response);
-	//	}
+		}
 	}
 
 	protected void airlineData(HttpServletRequest request, HttpServletResponse response) {
@@ -49,7 +49,7 @@ public class AirlinePreviewServlet extends HttpServlet {
 							airlineDataList.get(i).getAirlineCallsign(), airlineDataList.get(i).getAirlineCountry());
 					request.setAttribute("airlineData", airline);
 
-					RequestDispatcher rd = request.getRequestDispatcher("airlinePreview.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("view/airlinePreview.jsp");
 					rd.forward(request, response);
 
 				}

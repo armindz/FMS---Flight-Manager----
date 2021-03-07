@@ -25,12 +25,13 @@ public class BookingFlightTicket {
 
 		try {
 			if (isSeatAvailable(flightId, seatRow, seatNumber)) {
-				flightms.markSeatAsUnavailable(flightId, seatRow, seatNumber);
+				
 				Flight flight = flightms.getFlightFromFlightID(flightId);
 				FlightTicket flightTicket = new FlightTicket(flightId, flight.getAirline(), flight.getAirport(),
 						flight.getDestinationAirport(), flight.getFlightClass(), flight.getDateOfFlight(), seatRow,
 						seatNumber, flight.getFlightPrice(), buyers_Name);
 				addFlightTicketToDatabase(flightTicket);
+				flightms.markSeatAsUnavailable(flightId, seatRow, seatNumber);
 				System.out.println("Successfully booked!");
 
 			} else {
